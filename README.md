@@ -12,11 +12,11 @@ Ensure you have the following installed on your system:
 ### 1. Clone the Repository
 In your terminal: \
 git clone https://github.com/WaveformAI/WaveformAI-Website.git \
-cd WaveformAI-Website \
+cd WaveformAI-Website 
 
 ### 2. Install Dependencies
 cd frontend \
-npm install \
+npm install 
 
 ### 3. Run the Application (when inside frontend folder)
 npm run dev

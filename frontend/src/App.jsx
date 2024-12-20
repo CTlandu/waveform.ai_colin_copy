@@ -3,7 +3,9 @@
 function App() {
 
   return (
-    0
+    <div className="App">
+      <h1>Welcome To WaveForm AI</h1>
+    </div>
   );
 }
 

@@ -1,10 +1,9 @@
-
+import LandingPage from "./LandingPage";
 
 function App() {
-
   return (
     <div className="App">
-      <h1>Welcome To WaveForm AI</h1>
+      <LandingPage />
     </div>
   );
 }

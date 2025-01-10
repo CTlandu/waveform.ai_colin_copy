@@ -13,4 +13,4 @@ const userSchema = new mongoose.Schema({
     status: {type: String, default: 'active'},
 }, {timestamps: true});
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('users', userSchema);

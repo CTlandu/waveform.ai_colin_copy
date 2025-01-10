@@ -21,8 +21,10 @@ const PORT = process.env.PORT || 3000;
 
 //Define the routes
 const userRoutes = require("./routes/userRoutes");
-console.log(userRoutes);
 app.use("/users", userRoutes);
+
+const eventRoutes = require("./routes/eventsRoutes");
+app.use("/events", eventRoutes);
 
 
 app.get("/", (req, res) => {

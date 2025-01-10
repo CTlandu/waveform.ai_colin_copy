@@ -20,11 +20,14 @@ app.use(cors());
 const PORT = process.env.PORT || 3000; 
 
 //Define the routes
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes"); //user routes
 app.use("/users", userRoutes);
 
-const eventRoutes = require("./routes/eventsRoutes");
+const eventRoutes = require("./routes/eventsRoutes"); //event routes
 app.use("/events", eventRoutes);
+
+const performanceRoutes = require("./routes/performancesRoutes"); //performance routes
+app.use("/performances", performanceRoutes);
 
 
 app.get("/", (req, res) => {

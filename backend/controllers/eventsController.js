@@ -1,4 +1,4 @@
-// eventController
+// eventsController
 const Event = require("../models/event"); // Import the event model
 
 const createEvent = async (req, res) => {

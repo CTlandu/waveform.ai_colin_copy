@@ -16,6 +16,29 @@ export default {
           90: "#00EBEC", // 颜色 90
         },
       },
+      keyframes: {
+        float: {
+          "0%": {
+            transform: "translateY(100vh) scale(0)",
+            opacity: "0",
+          },
+          "5%": {
+            transform: "translateY(90vh) scale(1)",
+            opacity: "1",
+          },
+          "95%": {
+            transform: "translateY(10vh) scale(1)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(0) scale(0)",
+            opacity: "0",
+          },
+        },
+      },
+      animation: {
+        float: "float 20s linear infinite",
+      },
     },
   },
   variants: {},

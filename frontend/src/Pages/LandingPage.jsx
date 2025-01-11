@@ -1,8 +1,12 @@
+import FloatingBubbles from "../Components/FloatingBubbles";
+
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-10 to-primary-30">
+    <div className="relative min-h-screen bg-gradient-to-b from-primary-10 to-primary-30 overflow-hidden">
+      <FloatingBubbles />
+
       {/* Hero Section */}
-      <section className="py-20 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">

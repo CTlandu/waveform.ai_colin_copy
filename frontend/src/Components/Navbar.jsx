@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import wmLogo from "../assets/wm-logo.png";
 
 const Navbar = () => {
   return (
@@ -51,14 +52,20 @@ const Navbar = () => {
         </div>
 
         {/* RSVP button */}
-        <button className="flex items-center space-x-2 bg-white rounded-full px-6 py-2 hover:bg-gray-100 transition-colors">
-          <img
-            src="/wm-logo.png" // need to add school logo
-            alt="William & Mary Logo"
-            className="w-5 h-5"
-          />
-          <span className="text-primary-10 font-medium">RSVP</span>
-        </button>
+        <div className="relative">
+          <button className="flex items-center bg-white rounded-full pl-12 pr-6 py-2 hover:bg-gray-100 transition-colors">
+            <div className="absolute left-0 top-1/2 -translate-y-1/2">
+              <div className="w-10 h-10 rounded-full bg-primary-10 flex items-center justify-center">
+                <img
+                  src={wmLogo}
+                  alt="William & Mary Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </div>
+            </div>
+            <span className="text-primary-10 font-medium">RSVP</span>
+          </button>
+        </div>
       </div>
     </nav>
   );

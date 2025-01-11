@@ -20,10 +20,25 @@ cd WaveformAI-Website
 
 ### 2. Install Dependencies
 
+#### frontend:
+
 cd frontend \
 npm install
 
-### 3. Run the Application (when inside frontend folder)
+#### backend:
+
+cd ../backend \
+npm install
+
+### 3. Run the Application
+
+#### run backend server (when inside backend folder)
+
+node server.js
+
+#### run frontend server
+
+cd ../frontend \
 
 npm run dev
 

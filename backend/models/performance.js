@@ -10,7 +10,7 @@ const performanceSchema = new mongoose.Schema({
     date: {type:Date, required: true},
     time: {type: String, required: true},
     location: {type: String, required: true},
-    organizer: {type: String},
+    organizer: {type: String, default: "admin"},
     participants: [{type:String}],
     analytics: {
         views : {type: Number, default: 0},

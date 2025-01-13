@@ -82,7 +82,7 @@ const updateUser = async (req, res) => {
 
 
         //send the response
-        res.status(200).json({message: updateUser});
+        res.status(200).json({user: updateUser});
 
     } catch (err) {
         console.log(err);
@@ -90,5 +90,38 @@ const updateUser = async (req, res) => {
     }
 }
 
+const resetPassword = async (req, res) => {
+    try{
+        const userID = req.params.id; //get user id
 
-module.exports = { registerUser, loginUser, updateUser }; // Export the functions
+        //check if UserID is provided
+        if (!userID) return res.status(400).json({message: "User ID required"});
+
+        const { password } = req.body;
+
+        //check if password is provided
+        if (!password) return res.status(400).json({message: "No new password provided"});
+
+        //Hash new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        //update password in database
+        const updatedUser = await User.findByIdAndUpdate(
+            userID,
+            { $set: {password: hashedPassword} },
+            {new: true, runValidators: true}
+        );
+
+        //return error if user is not found
+        if (!updateUser) return res.status(404).json({message: "User not found"});
+
+        //send the response
+        res.status(200).json({user: updateUser});
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message: "Server Error"});
+    }
+}
+
+module.exports = { registerUser, loginUser, updateUser, resetPassword }; // Export the functions

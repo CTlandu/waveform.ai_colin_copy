@@ -53,5 +53,42 @@ const loginUser = async (req, res) => {
     }
 }
 
+const updateUser = async (req, res) => {
+    try{
+        const updates = req.body; //get the request body
+        const userID = req.params.id; //get user id
 
-module.exports = { registerUser, loginUser }; // Export the functions
+        //Check if userId is provided
+        if (!userID) return res.status(400).json({message: "User ID is required"});
+
+        //Check if any updates are provided
+        if (!updates || Object.keys(updates).length == 0) return res.status(400).json({message: "No fields provided for update."});
+
+        // Restrict certain fields from being updated
+        const restrictedUpdateFields = ["role", "permissions", "status", "password"]; //fields that cannot be updated
+        for (const field of Object.keys(updates)){
+            if (restrictedUpdateFields.includes(field)) return res.status(403).json({message: `Field ${field} cannot be updated`});
+        }
+
+        //Update user in database
+        const updatedUser = await User.findByIdAndUpdate(
+            userID,
+            { $set: updates },
+            { new: true, runValidators: true} 
+        );
+
+        //If no user was found, return error
+        if (!updatedUser) return res.status(404).json({message: "User not found"});
+
+
+        //send the response
+        res.status(200).json({message: updateUser});
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Server Error"});
+    }
+}
+
+
+module.exports = { registerUser, loginUser, updateUser }; // Export the functions

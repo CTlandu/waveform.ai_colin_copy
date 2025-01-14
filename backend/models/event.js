@@ -15,9 +15,9 @@ const eventSchema = new mongoose.Schema({
     type: {type: String, default: 'event'},
     headcount: {type: Number, default: 0},
     status: {type: String, default: 'open'},
-    capacity: {type: Number},
-    registration_deadline: {type: Date},
-    fee: {type: Number},
+    capacity: {type: Number, default: 0},
+    registration_deadline: {type: Date, required: true},
+    fee: {type: Number, default: 0},
 }, {timestamps: true});
 
 module.exports = mongoose.model('events', eventSchema);

@@ -3,6 +3,7 @@ const User = require("../models/user"); // Import the User model
 const bcrypt = require("bcryptjs"); // Import bcrypt
 const jwt = require("jsonwebtoken"); // Import jsonwebtoken
 
+//function to register user #####  currently expects a username, email and password to be provided in the request body
 const registerUser = async (req, res) => {
     try{
         const { username, email, password } = req.body; // Destructure the request body
@@ -29,6 +30,7 @@ const registerUser = async (req, res) => {
     }
 }
 
+//function to login user #####  currently expects an email and password to be provided in the request body
 const loginUser = async (req, res) => {
     try{
         const { email, password } = req.body; // Destructure the request body
@@ -53,6 +55,7 @@ const loginUser = async (req, res) => {
     }
 }
 
+//function to update user #####  currently expects a user id as a parameter and fields to be updated to be provided in the request body
 const updateUser = async (req, res) => {
     try{
         const updates = req.body; //get the request body
@@ -90,6 +93,8 @@ const updateUser = async (req, res) => {
     }
 }
 
+//function to reset password #####  currently expects a user id as a parameter and the old password and new password to be provided in the request body
+//the old password is used to verify the user before updating the password
 const resetPassword = async (req, res) => {
     try{
         const userID = req.params.id; //get user id
@@ -97,13 +102,21 @@ const resetPassword = async (req, res) => {
         //check if UserID is provided
         if (!userID) return res.status(400).json({message: "User ID required"});
 
-        const { password } = req.body;
+        // Check if the user exists
+        const existingUser = await User.findById(userID);
+        if (!existingUser) return res.status(404).json({message: "User does not exist"});
 
-        //check if password is provided
-        if (!password) return res.status(400).json({message: "No new password provided"});
+        const { old_password, new_password } = req.body;
+
+        // Check if the password is correct
+        const isMatch = await bcrypt.compare(old_password, existingUser.password);
+        if (!isMatch) return res.status(400).json({message: "Invalid credentials"});
+
+        //check if new password is provided
+        if (!new_password) return res.status(400).json({message: "No new password provided"});
 
         //Hash new password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(new_password, 10);
 
         //update password in database
         const updatedUser = await User.findByIdAndUpdate(

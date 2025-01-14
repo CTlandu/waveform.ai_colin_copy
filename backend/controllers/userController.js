@@ -85,7 +85,7 @@ const updateUser = async (req, res) => {
 
 
         //send the response
-        res.status(200).json({user: updateUser});
+        res.status(200).json({result: updatedUser});
 
     } catch (err) {
         console.log(err);
@@ -129,7 +129,7 @@ const resetPassword = async (req, res) => {
         if (!updateUser) return res.status(404).json({message: "User not found"});
 
         //send the response
-        res.status(200).json({user: updateUser});
+        res.status(200).json({result: updateUser});
 
     }catch(err){
         console.log(err);
@@ -168,7 +168,7 @@ const adminUpdate = async (req, res) => {
         if (!updatedUser) return res.status(404).json({message: "User not found"});
 
         //send the response
-        res.status(200).json({user: updatedUser});
+        res.status(200).json({result: updatedUser});
 
     }catch(err){
         console.log(err);
@@ -176,4 +176,28 @@ const adminUpdate = async (req, res) => {
     }
 
 }
-module.exports = { registerUser, loginUser, updateUser, resetPassword, adminUpdate }; // Export the functions
+
+//function to delete user #####  currently expects a user id as a parameter
+const deleteUser = async (req, res) => {
+    try{
+        const userID = req.params.id; //get user id
+
+        //Check if userId is provided
+        if (!userID) return res.status(400).json({message: "User ID required"});
+
+        //Delete user from database
+        const deletedUser = await User.findByIdAndDelete(userID);
+
+        //If no user was found, return error
+        if (!deletedUser) return res.status(404).json({message: "User not found"});
+
+        //Send the response
+        res.status(200).json({result: deletedUser, message: "User deleted"});
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message: "Server Error"});
+    }
+}
+
+module.exports = { registerUser, loginUser, updateUser, resetPassword, adminUpdate, deleteUser }; // Export the functions

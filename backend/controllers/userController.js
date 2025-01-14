@@ -137,4 +137,43 @@ const resetPassword = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, updateUser, resetPassword }; // Export the functions
+//function to update user role #####  currently expects a user id as a parameter and the role to be updated to be provided in the request body
+//updates role or permissions of a user
+//ADMIN ONLY 
+const adminUpdate = async (req, res) => {
+    try{
+        const updates = req.body;
+        const userID = req.params.id;
+
+        //Check if userId is provided
+        if (!userID) return res.status(400).json({message: "User ID is required"});
+
+        //Check if any updates are provided
+        if (!updates || Object.keys(updates).length == 0) return res.status(400).json({message: "No fields provided for update."});
+
+        //Restrict certain fields from being updated with this function
+        const restrictedUpdateFields = ["username", "email", "password"]; //fields that cannot be updated
+        for (const field of Object.keys(updates)){
+            if (restrictedUpdateFields.includes(field)) return res.status(403).json({message: `Field ${field} cannot be updated`});
+        }
+
+        //Update user in database
+        const updatedUser = await User.findByIdAndUpdate(
+            userID,
+            { $set: updates },
+            { new: true, runValidators: true}
+        )
+
+        //If no user was found, return error
+        if (!updatedUser) return res.status(404).json({message: "User not found"});
+
+        //send the response
+        res.status(200).json({user: updatedUser});
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message: "Server Error"});
+    }
+
+}
+module.exports = { registerUser, loginUser, updateUser, resetPassword, adminUpdate }; // Export the functions

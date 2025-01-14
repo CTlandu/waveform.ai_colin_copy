@@ -1,6 +1,6 @@
 // userRoutes
 const express = require("express");
-const { registerUser, loginUser, updateUser, resetPassword  } = require("../controllers/userController"); // Import the user controllers
+const { registerUser, loginUser, updateUser, resetPassword, adminUpdate  } = require("../controllers/userController"); // Import the user controllers
 const router = express.Router(); // Create a new router
 
 router.get('/', (req, res) => {
@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.patch("/update/:id", updateUser);
-router.patch("/update_password/:id", resetPassword)
+router.patch("/update_password/:id", resetPassword);
+router.patch("/admin_update/:id", adminUpdate);
 
 
 module.exports = router;

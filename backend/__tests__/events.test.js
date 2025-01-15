@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../server");
+const mongoose = require("mongoose");
 
 describe('Events API Endpoints', () => {
     //variable to eventually store the specific event id
@@ -41,5 +42,9 @@ describe('Events API Endpoints', () => {
         expect(res.statusCode).toBe(200);
     });
 
+    afterAll(async () => {
+        await mongoose.connection.close();
+        console.log("MongoDB connection closed");
+    });
 
 });

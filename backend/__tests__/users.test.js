@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../server");
+const mongoose = require("mongoose");
 
 describe('User API Endpoints', () => {
     //variable to eventually save the user id
@@ -71,6 +72,11 @@ describe('User API Endpoints', () => {
         const res = await request(app).delete(`/users/${userID}/delete`);
 
         expect(res.statusCode).toBe(200);
+    });
+
+    afterAll(async () => {
+        await mongoose.connection.close();
+        console.log("MongoDB connection closed");
     });
 
 });

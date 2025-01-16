@@ -25,11 +25,34 @@ const createPerformance = async (req, res) => {
 const getAllPerformances = async (req, res) => {
     try{
         const performances = await Performance.find();
-        res.status(200).json(performances)
+        res.status(200).json({result: performances})
     }catch(err){
         console.log(err)
         res.status(500).json({message: "service error"})
     }
 }
 
-module.exports = {createPerformance, getAllPerformances}; //Export the functions
+const deletePerformance = async (req, res) => {
+    try{
+        //destructure id from params
+        const { id } = req.params;
+
+        //check if id is provided
+        if (!id) return res.status(400).json({message: "Performance ID not provided"});
+
+        //find performance by id and delete
+        const performance = await Performance.findByIdAndDelete(id);
+
+        //check if performance exists
+        if (!performance) return res.status(404).json({message: "Performance does not exist"});
+
+        //Send the response
+        res.status(200).json({result: performance, message: "Performance deleted successfully"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message: "service error"})
+    }
+
+}
+
+module.exports = {createPerformance, getAllPerformances, deletePerformance }; //Export the functions

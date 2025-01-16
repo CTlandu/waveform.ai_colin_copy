@@ -34,6 +34,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Start the server only if this file is run directly
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+// Export the app for testing
+module.exports = app;

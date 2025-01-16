@@ -8,6 +8,10 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
+const swaggerIo = require('swagger-ui-express');
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./docs/user-api-spec.yaml");
+
 //Load config and connect to the database
 dotenv.config();
 connectDB();
@@ -18,6 +22,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT || 3000; 
+
+//Use the swagger document
+app.use("/api-docs", swaggerIo.serve, swaggerIo.setup(swaggerDocument));
 
 //Define the routes
 const userRoutes = require("./routes/userRoutes"); //user routes

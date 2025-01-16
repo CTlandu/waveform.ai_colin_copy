@@ -38,10 +38,27 @@ node server.js
 
 #### run frontend server
 
-cd ../frontend \
+cd ../frontend 
 
 npm run dev
 
 ### 5. Access the Website
 
 Open your browser and navigate to the url(localhost:5173, in default) provided in your terminal
+
+### API Documentation
+
+A comprehensive list of all available API documentation can be accessed using Swagger. Navigate to the following base URL to explore the documentation:
+
+`<backend-server>/api-docs/`
+
+From there, you can find links to the specific API documentation pages:
+
+- `<backend-server>/api-docs/user`  
+  Documentation for managing user-related data.
+
+- `<backend-server>/api-docs/event`  
+  Documentation for managing events in the system.
+
+- `<backend-server>/api-docs/performance`  
+  Documentation for managing performances, including their details, participants, and analytics.

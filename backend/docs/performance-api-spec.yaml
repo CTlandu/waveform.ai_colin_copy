@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Performances API
+  description: API documentation for managing performances.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+
+paths:
+  /performances:
+    post:
+      summary: Create a new performance
+      description: Adds a new performance to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the performance
+                  example: Winter Showcase 2025
+                description:
+                  type: string
+                  description: Description of the performance
+                  example: A showcase of winter-themed performances.
+                date:
+                  type: string
+                  format: date
+                  description: Date of the performance
+                  example: 2025-12-15
+                time:
+                  type: string
+                  description: Time of the performance
+                  example: "7:00 PM"
+                location:
+                  type: string
+                  description: Location of the performance
+                  example: Grand Theater Hall
+              required:
+                - name
+                - description
+                - date
+                - time
+                - location
+      responses:
+        "200":
+          description: Performance created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Performance'
+        "400":
+          description: Bad request (e.g., performance with the same name already exists)
+        "500":
+          description: Internal server error
+    get:
+      summary: Get all performances
+      description: Retrieves a list of all performances.
+      responses:
+        "200":
+          description: A list of performances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Performance'
+        "500":
+          description: Internal server error
+
+  /performances/{id}:
+    delete:
+      summary: Delete a performance
+      description: Deletes a performance by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the performance to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Performance deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Performance'
+                  message:
+                    type: string
+                    example: Performance deleted successfully
+        "400":
+          description: Bad request (e.g., Performance ID not provided)
+        "404":
+          description: Performance not found
+        "500":
+          description: Internal server error
+
+components:
+  schemas:
+    Performance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the performance
+        name:
+          type: string
+          description: Name of the performance
+        description:
+          type: string
+          description: Description of the performance
+        date:
+          type: string
+          format: date
+          description: Date of the performance
+        time:
+          type: string
+          description: Time of the performance
+        location:
+          type: string
+          description: Location of the performance
+        organizer:
+          type: string
+          description: Organizer of the performance
+        participants:
+          type: array
+          items:
+            type: string
+          description: List of participants
+        analytics:
+          type: object
+          properties:
+            views:
+              type: number
+              description: Number of views for the performance
+            registrations:
+              type: number
+              description: Number of registrations for the performance
+        createdAt:
+          type: string
+          format: date-time
+          description: Performance creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Performance update timestamp

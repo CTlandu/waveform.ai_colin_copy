@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Events API
+  description: API documentation for managing events.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+
+paths:
+  /events:
+    post:
+      summary: Create a new event
+      description: Adds a new event to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the event
+                  example: opening ceremony
+                description:
+                  type: string
+                  description: Description of the event
+                  example: Opening ceremony for waveform ai 
+                date:
+                  type: string
+                  format: date
+                  description: Date of the event
+                  example: 2025-06-01
+                time:
+                  type: string
+                  description: Time of the event
+                  example: "10:00 AM"
+                location:
+                  type: string
+                  description: Location of the event
+                  example: PBK Hall
+                organizer:
+                  type: string
+                  description: Organizer of the event
+                  example: Waveform AI
+                registration_deadline:
+                  type: string
+                  format: date
+                  description: Registration deadline for the event
+                  example: 2025-05-25
+              required:
+                - name
+                - description
+                - date
+                - time
+                - location
+                - organizer
+                - registration_deadline
+      responses:
+        "200":
+          description: Event created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Event'
+        "400":
+          description: Bad request (e.g., event with the same name already exists)
+        "500":
+          description: Internal server error
+    get:
+      summary: Get all events
+      description: Retrieves a list of all events.
+      responses:
+        "200":
+          description: A list of events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+        "500":
+          description: Internal server error
+
+  /events/{id}:
+    delete:
+      summary: Delete an event
+      description: Deletes an event by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the event to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Event deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    $ref: '#/components/schemas/Event'
+                  message:
+                    type: string
+                    example: Event deleted successfully
+        "400":
+          description: Bad request (e.g., Event ID not provided)
+        "404":
+          description: Event not found
+        "500":
+          description: Internal server error
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the event
+        name:
+          type: string
+          description: Name of the event
+        description:
+          type: string
+          description: Description of the event
+        date:
+          type: string
+          format: date
+          description: Date of the event
+        time:
+          type: string
+          description: Time of the event
+        location:
+          type: string
+          description: Location of the event
+        organizer:
+          type: string
+          description: Organizer of the event
+        participants:
+          type: array
+          items:
+            type: string
+          description: List of participants
+        type:
+          type: string
+          description: Type of the event
+        headcount:
+          type: number
+          description: Headcount of the event
+        status:
+          type: string
+          description: Status of the event
+        capacity:
+          type: number
+          description: Capacity of the event
+        registration_deadline:
+          type: string
+          format: date
+          description: Registration deadline for the event
+        fee:
+          type: number
+          description: Registration fee for the event
+        createdAt:
+          type: string
+          format: date-time
+          description: Event creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Event update timestamp

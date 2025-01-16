@@ -5,6 +5,16 @@ const mongoose = require("mongoose");
 describe('Performance API Endpoints', () => {
     // variable to eventually store the specific performance id
     let performanceID;
+    //variable to store the number of performances
+    let number_of_performances;
+
+    test("Get all performances", async () => {
+        const res = await request(app).get("/performances/get");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.result).toBeInstanceOf(Array);
+        number_of_performances = res.body.result.length;
+    });
 
     test("Create new  performance", async () => {
         const res = await request(app)
@@ -26,6 +36,13 @@ describe('Performance API Endpoints', () => {
         expect(res.body.result.location).toBe("jestLocation");
     });
 
+    test("Get all performances after creating a new performance", async () => {
+        const res = await request(app).get("/performances/get");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.result).toBeInstanceOf(Array);
+        expect(res.body.result.length).toBe(number_of_performances + 1);
+    });
 
 
     test("Delete the performance", async () => {

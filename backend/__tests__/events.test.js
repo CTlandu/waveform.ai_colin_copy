@@ -5,7 +5,16 @@ const mongoose = require("mongoose");
 describe('Events API Endpoints', () => {
     //variable to eventually store the specific event id
     let eventID;
+    //variable to store the number of events
+    let number_of_events;
 
+    test("Get all events", async () => {
+        const res = await request(app).get("/events/get");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.result).toBeInstanceOf(Array);
+        number_of_events = res.body.result.length;
+    });
 
     test("Create a new event", async () => {
         const res = await request(app)
@@ -34,6 +43,13 @@ describe('Events API Endpoints', () => {
 
     });
 
+    test("Get all events after creating a new event", async () => {
+        const res = await request(app).get("/events/get");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.result).toBeInstanceOf(Array);
+        expect(res.body.result.length).toBe(number_of_events + 1);
+    });
 
     test("Delete the event", async () => {
         expect(eventID).toBeDefined();

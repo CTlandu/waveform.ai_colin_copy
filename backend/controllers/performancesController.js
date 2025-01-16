@@ -25,7 +25,7 @@ const createPerformance = async (req, res) => {
 const getAllPerformances = async (req, res) => {
     try{
         const performances = await Performance.find();
-        res.status(200).json(performances)
+        res.status(200).json({result: performances})
     }catch(err){
         console.log(err)
         res.status(500).json({message: "service error"})

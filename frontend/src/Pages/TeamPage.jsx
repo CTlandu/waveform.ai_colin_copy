@@ -1,56 +1,41 @@
+import { useState } from "react";
 import FloatingBubbles from "../Components/FloatingBubbles";
-import { useEffect, useState } from "react";
+import { teamMembers } from "../data/teamMembers";
 
 const TeamPage = () => {
-  // Sample team data - replace with actual data later
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Dr. Benjamin Whiting",
-      role: "Project Lead",
-      image: "https://placehold.co/300x300",
-    },
-    // ... add other team members
-  ];
+  const [selectedMember, setSelectedMember] = useState(null);
 
-  // Generate random positions for each member
+  // Generate positions in a circular layout
   const generatePositions = () => {
-    return teamMembers.map((member) => ({
-      ...member,
-      // Generate positions within a central area of the container
-      left: 35 + Math.random() * 30, // between 35-65% of container width
-      top: 25 + Math.random() * 50, // between 25-75% of container height
-      // Add slight animation delay variation
-      animationDelay: Math.random() * 2,
-    }));
+    const centerX = 50; // Center of container
+    const centerY = 50; // Center of container
+    const radius = 25; // Radius of the circle
+
+    return teamMembers.map((member, index) => {
+      // Calculate angle for each member
+      const angle = (index * 2 * Math.PI) / teamMembers.length;
+
+      // Add some randomness to make it look more natural
+      const randomRadius = radius + (Math.random() - 0.5) * 10;
+
+      // Calculate position using trigonometry
+      const left = centerX + randomRadius * Math.cos(angle);
+      const top = centerY + randomRadius * Math.sin(angle);
+
+      return {
+        ...member,
+        left,
+        top,
+        animationDelay: Math.random() * 2,
+      };
+    });
   };
 
   const [members, setMembers] = useState(generatePositions());
 
-  // Optional: Regenerate positions periodically for more dynamic feel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMembers(generatePositions());
-    }, 10000); // Regenerate every 10 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-primary-10 to-primary-30 overflow-hidden">
       <FloatingBubbles />
-
-      {/* Header Section */}
-      <section className="relative py-12 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Our Team
-          </h1>
-          <p className="text-xl text-primary-90/80 max-w-2xl mx-auto">
-            Meet the brilliant minds behind Waveform.ai
-          </p>
-        </div>
-      </section>
 
       {/* Team Members Container */}
       <div className="relative w-full h-[600px] mx-auto max-w-6xl px-6">
@@ -68,8 +53,10 @@ const TeamPage = () => {
             }}
           >
             {/* Member Card */}
-            <div className="group relative">
-              {/* Image Container */}
+            <div
+              className="group relative cursor-pointer"
+              onClick={() => setSelectedMember(member)}
+            >
               <div
                 className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden 
                             border-4 border-primary-50/30 hover:border-primary-50 
@@ -82,7 +69,6 @@ const TeamPage = () => {
                 />
               </div>
 
-              {/* Name Tag */}
               <div
                 className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 
                             bg-primary-50/90 backdrop-blur-sm px-3 py-1 rounded-full 
@@ -96,6 +82,38 @@ const TeamPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {selectedMember && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          onClick={() => setSelectedMember(null)}
+        >
+          <div
+            className="bg-primary-20/90 backdrop-blur-md rounded-2xl p-8 max-w-2xl mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start gap-6">
+              <img
+                src={selectedMember.image}
+                alt={selectedMember.name}
+                className="w-40 h-40 rounded-full object-cover border-4 border-primary-50/30"
+              />
+              <div className="flex-1">
+                <h2 className="text-3xl font-bold text-white mb-2">
+                  {selectedMember.name}
+                </h2>
+                <h3 className="text-xl text-primary-90/80 mb-4">
+                  {selectedMember.role}
+                </h3>
+                <p className="text-white/80 leading-relaxed">
+                  {selectedMember.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

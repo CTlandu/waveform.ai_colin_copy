@@ -1,7 +1,7 @@
 // performancesController
 const pool = require("../config/db");
 
-
+//post <backend-server>/api/performances/create
 const createPerformance = async (req, res) => {
     const client = await pool.connect();
     try{
@@ -35,6 +35,7 @@ const createPerformance = async (req, res) => {
     }
 }
 
+//get <backend-server>/api/performances/get
 const getAllPerformances = async (req, res) => {
     const client = await pool.connect();
     try{
@@ -49,6 +50,7 @@ const getAllPerformances = async (req, res) => {
     }
 }
 
+//delete <backend-server>/api/performances/:id/delete
 const deletePerformance = async (req, res) => {
     const client = await pool.connect();
     try{

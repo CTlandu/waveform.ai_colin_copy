@@ -1,6 +1,7 @@
 // eventsController using postgresql
 const pool = require("../config/db");
 
+//post <backend-server>/api/events/create
 const createEvent = async (req, res) => {
     const client = await pool.connect();
     try{
@@ -34,6 +35,7 @@ const createEvent = async (req, res) => {
     }
 }
 
+//get <backend-server>/api/events/get
 const getAllEvents = async (req, res) => {
     const client = await pool.connect();
     try{
@@ -50,6 +52,7 @@ const getAllEvents = async (req, res) => {
     }
 }
 
+//delete <backend-server>/api/events/:id/delete
 const deleteEvent = async (req, res) => {
     const client = await pool.connect();
     try{

@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 
+//post <backend-server>/api/users/register
 const registerUser = async (req, res) => {
     const client = await pool.connect();
     try {
@@ -40,6 +41,7 @@ const registerUser = async (req, res) => {
     }
 };
 
+//post <backend-server>/api/users/login
 const loginUser = async (req, res) => {
     const client = await pool.connect();
     try {
@@ -72,6 +74,7 @@ const loginUser = async (req, res) => {
     }
 };
 
+//patch <backend-server>/api/users/:id/update
 const updateUser = async (req, res) => {
     const client = await pool.connect();
     try {
@@ -115,6 +118,7 @@ const updateUser = async (req, res) => {
     }
 };
 
+//patch <backend-server>/api/users/:id/update_password
 const resetPassword = async (req, res) => {
     const client = await pool.connect();
     try {
@@ -158,6 +162,7 @@ const resetPassword = async (req, res) => {
     }
 };
 
+//patch <backend-server>/api/users/:id/update
 const adminUpdate = async (req, res) => {
     const client = await pool.connect();
     try {
@@ -205,6 +210,7 @@ const adminUpdate = async (req, res) => {
     }
 };
 
+//delete <backend-server>/api/users/:id/delete
 const deleteUser = async (req, res) => {
     const client = await pool.connect();
     try {

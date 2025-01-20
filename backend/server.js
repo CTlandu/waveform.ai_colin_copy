@@ -1,12 +1,9 @@
-// Code to start the server and connect to the database
-
-
-//importing the necessary modules
+// Importing the necessary modules
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
+const pool = require("./config/db"); // Import the connectDB function
 
 const swaggerIo = require('swagger-ui-express');
 const YAML = require("yamljs");
@@ -14,18 +11,16 @@ const userApiSpecs = YAML.load("./docs/user-api-spec.yaml");
 const eventApiSpecs = YAML.load("./docs/event-api-spec.yaml");
 const performanceApiSpecs = YAML.load("./docs/performance-api-spec.yaml");
 
-//Load config and connect to the database
+// Load config and connect to the database
 dotenv.config();
-connectDB();
 
-
-//Create an express app and use the necessary middleware
+// Create an express app and use the necessary middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT || 3000; 
 
-//landing page for api-docs
+// Landing page for API documentation
 app.get("/api-docs", (req, res) => {
   const apiDocsList = `
   <html>
@@ -42,7 +37,6 @@ app.get("/api-docs", (req, res) => {
   res.send(apiDocsList);
 });
 
-
 // Use the swagger documents
 app.use("/api-docs/user", swaggerIo.serve, (req, res, next) => {
   swaggerIo.setup(userApiSpecs)(req, res, next);
@@ -54,16 +48,15 @@ app.use("/api-docs/performance", swaggerIo.serve, (req, res, next) => {
   swaggerIo.setup(performanceApiSpecs)(req, res, next);
 });
 
-//Define the routes
-const userRoutes = require("./routes/userRoutes"); //user routes
-app.use("/users", userRoutes);
+// Define the routes
+const userRoutes = require("./routes/userRoutes"); // User routes
+app.use("/api/users", userRoutes);
 
-const eventRoutes = require("./routes/eventsRoutes"); //event routes
-app.use("/events", eventRoutes);
+const eventRoutes = require("./routes/eventsRoutes"); // Event routes
+app.use("/api/events", eventRoutes);
 
-const performanceRoutes = require("./routes/performancesRoutes"); //performance routes
-app.use("/performances", performanceRoutes);
-
+const performanceRoutes = require("./routes/performancesRoutes"); // Performance routes
+app.use("/api/performances", performanceRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");

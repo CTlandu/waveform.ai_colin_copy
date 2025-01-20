@@ -1,17 +1,17 @@
 openapi: 3.0.0
 info:
-  title: Waveform.ai User Management API
-  description: API endpoints for user registration, authentication, and management
+  title: Users API
+  description: API documentation for managing users.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
-    description: Development server
+  - url: http://localhost:3000/api
+    description: Local development server
 
 paths:
   /users/register:
     post:
       summary: Register a new user
-      description: Create a new user account and return JWT token
+      description: Creates a new user account in the system.
       requestBody:
         required: true
         content:
@@ -25,15 +25,18 @@ paths:
               properties:
                 username:
                   type: string
+                  example: johndoe
                 email:
                   type: string
                   format: email
+                  example: john.doe@example.com
                 password:
                   type: string
                   format: password
+                  example: "secretpassword123"
       responses:
         '200':
-          description: User successfully created
+          description: User registered successfully
           content:
             application/json:
               schema:
@@ -43,7 +46,7 @@ paths:
                     $ref: '#/components/schemas/User'
                   token:
                     type: string
-                    description: JWT token that expires in 1 hour
+                    description: JWT authentication token
         '400':
           description: User already exists
           content:
@@ -82,12 +85,14 @@ paths:
                 email:
                   type: string
                   format: email
+                  example: john.doe@example.com
                 password:
                   type: string
                   format: password
+                  example: "secretpassword123"
       responses:
         '200':
-          description: Successfully logged in
+          description: Login successful
           content:
             application/json:
               schema:
@@ -97,7 +102,6 @@ paths:
                     $ref: '#/components/schemas/User'
                   token:
                     type: string
-                    description: JWT token that expires in 1 hour
         '404':
           description: User does not exist
           content:
@@ -118,28 +122,17 @@ paths:
                   message:
                     type: string
                     example: "Invalid credentials"
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server Error"
 
   /users/{id}/update:
     patch:
-      summary: Update user information
-      description: Update user profile information (excluding role, permissions, status, and password)
+      summary: Update user profile
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: The user ID
+          description: User ID
       requestBody:
         required: true
         content:
@@ -149,11 +142,12 @@ paths:
               properties:
                 username:
                   type: string
-              example:
-                username: "newUsername"
+                email:
+                  type: string
+                  format: email
       responses:
         '200':
-          description: User successfully updated
+          description: User updated successfully
           content:
             application/json:
               schema:
@@ -172,7 +166,7 @@ paths:
                     type: string
                     example: "No fields provided for update."
         '403':
-          description: Forbidden update
+          description: Restricted field update attempted
           content:
             application/json:
               schema:
@@ -191,28 +185,17 @@ paths:
                   message:
                     type: string
                     example: "User not found"
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server Error"
 
   /users/{id}/update_password:
     patch:
-      summary: Update user password
-      description: Update user password with verification of old password
+      summary: Reset user password
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: The user ID
+          description: User ID
       requestBody:
         required: true
         content:
@@ -231,7 +214,7 @@ paths:
                   format: password
       responses:
         '200':
-          description: Password successfully updated
+          description: Password updated successfully
           content:
             application/json:
               schema:
@@ -240,7 +223,7 @@ paths:
                   result:
                     $ref: '#/components/schemas/User'
         '400':
-          description: Invalid request
+          description: Invalid credentials or missing password
           content:
             application/json:
               schema:
@@ -258,29 +241,18 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "User not found"
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server Error"
+                    example: "User does not exist"
 
   /users/{id}/admin_update:
     patch:
-      summary: Update user role and permissions (Admin only)
-      description: Update user role or permissions (excluding username, email, password)
+      summary: Admin update of user
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: The user ID
+          description: User ID
       requestBody:
         required: true
         content:
@@ -298,7 +270,7 @@ paths:
                   type: string
       responses:
         '200':
-          description: User successfully updated
+          description: User updated successfully
           content:
             application/json:
               schema:
@@ -317,7 +289,7 @@ paths:
                     type: string
                     example: "No fields provided for update."
         '403':
-          description: Forbidden update
+          description: Restricted field update attempted
           content:
             application/json:
               schema:
@@ -336,31 +308,20 @@ paths:
                   message:
                     type: string
                     example: "User not found"
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server Error"
 
   /users/{id}/delete:
     delete:
       summary: Delete user
-      description: Delete a user account by ID
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-          description: The user ID
+          description: User ID
       responses:
         '200':
-          description: User successfully deleted
+          description: User deleted successfully
           content:
             application/json:
               schema:
@@ -372,7 +333,7 @@ paths:
                     type: string
                     example: "User deleted"
         '400':
-          description: Bad request
+          description: User ID required
           content:
             application/json:
               schema:
@@ -391,51 +352,17 @@ paths:
                   message:
                     type: string
                     example: "User not found"
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server Error"
 
 components:
   schemas:
     User:
       type: object
       properties:
-        _id:
+        id:
           type: string
-          description: User's unique identifier
         username:
           type: string
-          description: User's display name
         email:
           type: string
-          format: email
-          description: User's email address
         password:
           type: string
-          description: Hashed password
-        role:
-          type: string
-          description: User's role
-        permissions:
-          type: array
-          items:
-            type: string
-          description: User's permissions
-        status:
-          type: string
-          description: User's status
-        createdAt:
-          type: string
-          format: date-time
-          description: Account creation timestamp
-        updatedAt:
-          type: string
-          format: date-time
-          description: Last update timestamp

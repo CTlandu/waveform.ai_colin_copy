@@ -1,20 +1,15 @@
-//Database connection setup
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();    
+// config/db.js
+//configure .env
+require('dotenv').config();
+const { Pool } = require('pg');
 
-const URI = process.env.MONGO_URI; // MongoDB connection string
+// Create a new pool instance
+const pool = new Pool({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
+});
 
-// Connect to MongoDB
-const connectDB = async () => {
-    try{
-        await mongoose.connect(URI);
-        console.log("MongoDB connection SUCCESS");
-    }catch(error){
-        console.error("MongoDB connection FAIL");
-        console.error(error);
-        process.exit(1);
-    }
-}
-
-module.exports = connectDB; // Export the function
+module.exports = pool;

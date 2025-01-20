@@ -1,203 +1,234 @@
-// userController
-const User = require("../models/user"); // Import the User model
-const bcrypt = require("bcryptjs"); // Import bcrypt
-const jwt = require("jsonwebtoken"); // Import jsonwebtoken
+// userController.js
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const pool = require("../config/db");
 
-//function to register user #####  currently expects a username, email and password to be provided in the request body
 const registerUser = async (req, res) => {
-    try{
-        const { username, email, password } = req.body; // Destructure the request body
+    const client = await pool.connect();
+    try {
+        const { username, email, password } = req.body;
 
-        // Check if the user already exists
-        const existingUser = await User.findOne({email});
-        if (existingUser) return res.status(400).json({message: "User already exists"});
+        // Check if user exists
+        const userCheck = await client.query(
+            'SELECT * FROM users WHERE email = $1',
+            [email]
+        );
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-        
-        // Create the user
-        const user = await User.create({username, email, password: hashedPassword});
-
-        // Create a token
-        const token = jwt.sign({email: user.email, id: user._id}, "test", {expiresIn: "1h"});
-
-        // Send the response
-        res.status(200).json({result: user, token});
-
-    }catch(err){
-        console.error(err);
-        res.status(500).json({message: "Server Error"});
-    }
-}
-
-//function to login user #####  currently expects an email and password to be provided in the request body
-const loginUser = async (req, res) => {
-    try{
-        const { email, password } = req.body; // Destructure the request body
-
-        // Check if the user exists
-        const existingUser = await User.findOne({email});
-        if (!existingUser) return res.status(404).json({message: "User does not exist"});
-
-        // Check if the password is correct
-        const isMatch = await bcrypt.compare(password, existingUser.password);
-        if (!isMatch) return res.status(400).json({message: "Invalid credentials"});
-
-        //Create Token
-        const token = jwt.sign({email: existingUser.email, id: existingUser._id}, "test", {expiresIn: "1h"});
-
-        //Send the response
-        res.status(200).json({result: existingUser, token});
-
-    }catch(err){
-        console.error(err);
-        res.status(500).json({message: "Server Error"});
-    }
-}
-
-//function to update user #####  currently expects a user id as a parameter and fields to be updated to be provided in the request body
-const updateUser = async (req, res) => {
-    try{
-        const updates = req.body; //get the request body
-        const userID = req.params.id; //get user id
-
-        //Check if userId is provided
-        if (!userID) return res.status(400).json({message: "User ID is required"});
-
-        //Check if any updates are provided
-        if (!updates || Object.keys(updates).length == 0) return res.status(400).json({message: "No fields provided for update."});
-
-        // Restrict certain fields from being updated
-        const restrictedUpdateFields = ["role", "permissions", "status", "password"]; //fields that cannot be updated
-        for (const field of Object.keys(updates)){
-            if (restrictedUpdateFields.includes(field)) return res.status(403).json({message: `Field ${field} cannot be updated`});
+        if (userCheck.rows.length) {
+            return res.status(400).json({ message: "User already exists" });
         }
 
-        //Update user in database
-        const updatedUser = await User.findByIdAndUpdate(
-            userID,
-            { $set: updates },
-            { new: true, runValidators: true} 
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        // Insert user
+        const result = await client.query(
+            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+            [username, email, hashedPassword]
         );
 
-        //If no user was found, return error
-        if (!updatedUser) return res.status(404).json({message: "User not found"});
-
-
-        //send the response
-        res.status(200).json({result: updatedUser});
+        const user = result.rows[0];
+        const token = jwt.sign({ email: user.email, id: user.id }, "test", { expiresIn: "1h" });
+        
+        res.status(200).json({ result: user, token });
 
     } catch (err) {
-        console.log(err);
-        res.status(500).json({message: "Server Error"});
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
     }
-}
+};
 
-//function to reset password #####  currently expects a user id as a parameter and the old password and new password to be provided in the request body
-//the old password is used to verify the user before updating the password
-const resetPassword = async (req, res) => {
-    try{
-        const userID = req.params.id; //get user id
+const loginUser = async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const { email, password } = req.body;
 
-        //check if UserID is provided
-        if (!userID) return res.status(400).json({message: "User ID required"});
-
-        // Check if the user exists
-        const existingUser = await User.findById(userID);
-        if (!existingUser) return res.status(404).json({message: "User does not exist"});
-
-        const { old_password, new_password } = req.body;
-
-        // Check if the password is correct
-        const isMatch = await bcrypt.compare(old_password, existingUser.password);
-        if (!isMatch) return res.status(400).json({message: "Invalid credentials"});
-
-        //check if new password is provided
-        if (!new_password) return res.status(400).json({message: "No new password provided"});
-
-        //Hash new password
-        const hashedPassword = await bcrypt.hash(new_password, 10);
-
-        //update password in database
-        const updatedUser = await User.findByIdAndUpdate(
-            userID,
-            { $set: {password: hashedPassword} },
-            {new: true, runValidators: true}
+        const result = await client.query(
+            'SELECT * FROM users WHERE email = $1',
+            [email]
         );
 
-        //return error if user is not found
-        if (!updateUser) return res.status(404).json({message: "User not found"});
+        if (!result.rows.length) {
+            return res.status(404).json({ message: "User does not exist" });
+        }
 
-        //send the response
-        res.status(200).json({result: updateUser});
+        const user = result.rows[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+        
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
 
-    }catch(err){
-        console.log(err);
-        res.status(500).json({message: "Server Error"});
+        const token = jwt.sign({ email: user.email, id: user.id }, "test", { expiresIn: "1h" });
+        res.status(200).json({ result: user, token });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
     }
-}
+};
 
-//function to update user role #####  currently expects a user id as a parameter and the role to be updated to be provided in the request body
-//updates role or permissions of a user
-//ADMIN ONLY 
-const adminUpdate = async (req, res) => {
-    try{
+const updateUser = async (req, res) => {
+    const client = await pool.connect();
+    try {
         const updates = req.body;
         const userID = req.params.id;
 
-        //Check if userId is provided
-        if (!userID) return res.status(400).json({message: "User ID is required"});
-
-        //Check if any updates are provided
-        if (!updates || Object.keys(updates).length == 0) return res.status(400).json({message: "No fields provided for update."});
-
-        //Restrict certain fields from being updated with this function
-        const restrictedUpdateFields = ["username", "email", "password"]; //fields that cannot be updated
-        for (const field of Object.keys(updates)){
-            if (restrictedUpdateFields.includes(field)) return res.status(403).json({message: `Field ${field} cannot be updated`});
+        if (!userID) return res.status(400).json({ message: "User ID is required" });
+        if (!updates || Object.keys(updates).length === 0) {
+            return res.status(400).json({ message: "No fields provided for update." });
         }
 
-        //Update user in database
-        const updatedUser = await User.findByIdAndUpdate(
-            userID,
-            { $set: updates },
-            { new: true, runValidators: true}
-        )
+        const restrictedUpdateFields = ["role", "permissions", "status", "password"];
+        for (const field of Object.keys(updates)) {
+            if (restrictedUpdateFields.includes(field)) {
+                return res.status(403).json({ message: `Field ${field} cannot be updated` });
+            }
+        }
 
-        //If no user was found, return error
-        if (!updatedUser) return res.status(404).json({message: "User not found"});
+        // Dynamically create update query
+        const setClause = Object.keys(updates)
+            .map((key, index) => `${key} = $${index + 1}`)
+            .join(', ');
+        const values = [...Object.values(updates), userID];
 
-        //send the response
-        res.status(200).json({result: updatedUser});
+        const result = await client.query(
+            `UPDATE users SET ${setClause} WHERE id = $${values.length} RETURNING *`,
+            values
+        );
 
-    }catch(err){
-        console.log(err);
-        res.status(500).json({message: "Server Error"});
+        if (!result.rows.length) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ result: result.rows[0] });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
     }
+};
 
-}
+const resetPassword = async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const userID = req.params.id;
+        const { old_password, new_password } = req.body;
 
-//function to delete user #####  currently expects a user id as a parameter
+        if (!userID) return res.status(400).json({ message: "User ID required" });
+        if (!new_password) return res.status(400).json({ message: "No new password provided" });
+
+        // Get user
+        const userResult = await client.query(
+            'SELECT * FROM users WHERE id = $1',
+            [userID]
+        );
+
+        if (!userResult.rows.length) {
+            return res.status(404).json({ message: "User does not exist" });
+        }
+
+        const user = userResult.rows[0];
+        const isMatch = await bcrypt.compare(old_password, user.password);
+        
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const hashedPassword = await bcrypt.hash(new_password, 10);
+
+        const result = await client.query(
+            'UPDATE users SET password = $1 WHERE id = $2 RETURNING *',
+            [hashedPassword, userID]
+        );
+
+        res.status(200).json({ result: result.rows[0] });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
+    }
+};
+
+const adminUpdate = async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const updates = req.body;
+        const userID = req.params.id;
+
+        if (!userID) return res.status(400).json({ message: "User ID is required" });
+        if (!updates || Object.keys(updates).length === 0) {
+            return res.status(400).json({ message: "No fields provided for update." });
+        }
+
+        const restrictedUpdateFields = ["username", "email", "password"];
+        for (const field of Object.keys(updates)) {
+            if (restrictedUpdateFields.includes(field)) {
+                return res.status(403).json({ message: `Field ${field} cannot be updated` });
+            }
+        }
+
+        // Handle array type for permissions if it exists
+        if (updates.permissions) {
+            updates.permissions = Array.isArray(updates.permissions) ? updates.permissions : [updates.permissions];
+        }
+
+        const setClause = Object.keys(updates)
+            .map((key, index) => `${key} = $${index + 1}`)
+            .join(', ');
+        const values = [...Object.values(updates), userID];
+
+        const result = await client.query(
+            `UPDATE users SET ${setClause} WHERE id = $${values.length} RETURNING *`,
+            values
+        );
+
+        if (!result.rows.length) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ result: result.rows[0] });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
+    }
+};
+
 const deleteUser = async (req, res) => {
-    try{
-        const userID = req.params.id; //get user id
+    const client = await pool.connect();
+    try {
+        const userID = req.params.id;
 
-        //Check if userId is provided
-        if (!userID) return res.status(400).json({message: "User ID required"});
+        if (!userID) return res.status(400).json({ message: "User ID required" });
 
-        //Delete user from database
-        const deletedUser = await User.findByIdAndDelete(userID);
+        const result = await client.query(
+            'DELETE FROM users WHERE id = $1 RETURNING *',
+            [userID]
+        );
 
-        //If no user was found, return error
-        if (!deletedUser) return res.status(404).json({message: "User not found"});
+        if (!result.rows.length) {
+            return res.status(404).json({ message: "User not found" });
+        }
 
-        //Send the response
-        res.status(200).json({result: deletedUser, message: "User deleted"});
+        res.status(200).json({ result: result.rows[0], message: "User deleted" });
 
-    }catch(err){
-        console.log(err);
-        res.status(500).json({message: "Server Error"});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server Error" });
+    } finally {
+        client.release();
     }
-}
+};
 
-module.exports = { registerUser, loginUser, updateUser, resetPassword, adminUpdate, deleteUser }; // Export the functions
+module.exports = { registerUser, loginUser, updateUser, resetPassword, adminUpdate, deleteUser };

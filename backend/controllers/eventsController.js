@@ -1,5 +1,5 @@
 // eventsController
-const Event = require("../models/event"); // Import the event model
+/*
 
 const createEvent = async (req, res) => {
     try{
@@ -59,4 +59,4 @@ const deleteEvent = async (req, res) => {
     }
 }
 
-module.exports = {createEvent, getAllEvents, deleteEvent}; // Export the functions
+module.exports = {createEvent, getAllEvents, deleteEvent}; // Export the functions*/

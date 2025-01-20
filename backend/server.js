@@ -55,8 +55,8 @@ app.use("/api/users", userRoutes);
 const eventRoutes = require("./routes/eventsRoutes"); // Event routes
 app.use("/api/events", eventRoutes);
 
-//const performanceRoutes = require("./routes/performancesRoutes"); // Performance routes
-//app.use("/api/performances", performanceRoutes);
+const performanceRoutes = require("./routes/performancesRoutes"); // Performance routes
+app.use("/api/performances", performanceRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");

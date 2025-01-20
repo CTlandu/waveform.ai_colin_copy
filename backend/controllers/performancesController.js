@@ -1,38 +1,56 @@
 // performancesController
-/*
+const pool = require("../config/db");
+
 
 const createPerformance = async (req, res) => {
+    const client = await pool.connect();
     try{
         //destructure the body
         const { name, description, date, time, location } = req.body;
 
         //check if performance exists
-        const existingPerformance = await Performance.findOne({name});
+        const performanceCheck = await pool.query(
+            "SELECT * FROM performances WHERE name = $1",
+            [name]
+        );
+
+        const existingPerformance = performanceCheck.rows[0];
+
         if (existingPerformance) return res.status(400).json({message: "a performance with same name already exists"});
 
         //Create the performance
-        const performance = await Performance.create({name, description, date, time, location});
+        const performance = await pool.query(
+            "INSERT INTO performances (name, description, date, time, location) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [name, description, date, time, location]
+        );
 
         //Send the response
-        res.status(200).json({result: performance})
+        res.status(200).json({result: performance.rows[0]});
 
     }catch(err){
         console.log(err)
-        res.status(500).json({message: "service error"});
+        res.status(500).json({message: "Server error"});
+    }finally {
+        client.release();
     }
 }
 
 const getAllPerformances = async (req, res) => {
+    const client = await pool.connect();
     try{
-        const performances = await Performance.find();
-        res.status(200).json({result: performances})
+        //find all performances
+        const performances = await pool.query("SELECT * FROM performances");
+        res.status(200).json({result: performances});
     }catch(err){
         console.log(err)
-        res.status(500).json({message: "service error"})
+        res.status(500).json({message: "Server error"})
+    }finally {
+        client.release();
     }
 }
 
 const deletePerformance = async (req, res) => {
+    const client = await pool.connect();
     try{
         //destructure id from params
         const { id } = req.params;
@@ -41,18 +59,23 @@ const deletePerformance = async (req, res) => {
         if (!id) return res.status(400).json({message: "Performance ID not provided"});
 
         //find performance by id and delete
-        const performance = await Performance.findByIdAndDelete(id);
+        const performance = await pool.query(
+            "DELETE FROM performances WHERE id = $1 RETURNING *",
+            [id]
+        );
 
         //check if performance exists
         if (!performance) return res.status(404).json({message: "Performance does not exist"});
 
         //Send the response
-        res.status(200).json({result: performance, message: "Performance deleted successfully"});
+        res.status(200).json({result: performance.rows[0], message: "Performance deleted successfully"});
     }catch(err){
         console.log(err);
-        res.status(500).json({message: "service error"})
+        res.status(500).json({message: "Server error"})
+    }finally {
+        client.release();
     }
 
 }
 
-module.exports = {createPerformance, getAllPerformances, deletePerformance }; //Export the functions*/
+module.exports = {createPerformance, getAllPerformances, deletePerformance }; //Export the functions

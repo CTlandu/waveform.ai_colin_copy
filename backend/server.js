@@ -52,8 +52,8 @@ app.use("/api-docs/performance", swaggerIo.serve, (req, res, next) => {
 const userRoutes = require("./routes/userRoutes"); // User routes
 app.use("/api/users", userRoutes);
 
-//const eventRoutes = require("./routes/eventsRoutes"); // Event routes
-//app.use("/api/events", eventRoutes);
+const eventRoutes = require("./routes/eventsRoutes"); // Event routes
+app.use("/api/events", eventRoutes);
 
 //const performanceRoutes = require("./routes/performancesRoutes"); // Performance routes
 //app.use("/api/performances", performanceRoutes);

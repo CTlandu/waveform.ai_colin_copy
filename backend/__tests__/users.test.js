@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../server");
+const pool = require("../config/db");
 
 describe('User API Endpoints', () => {
     //variable to eventually save the user id
@@ -73,5 +74,10 @@ describe('User API Endpoints', () => {
         expect(res.statusCode).toBe(200);
     });
 
+    //after all tests are done, close the postgres connection
+    afterAll(async () => {
+        await pool.end();
+        console.log("Postgres connection closed");
+    });
 
 });

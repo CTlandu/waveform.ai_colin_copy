@@ -59,6 +59,3 @@ From there, you can find links to the specific API documentation pages:
 
 - `<backend-server>/api-docs/event`  
   Documentation for managing events in the system.
-
-- `<backend-server>/api-docs/performance`  
-  Documentation for managing performances, including their details, participants, and analytics.

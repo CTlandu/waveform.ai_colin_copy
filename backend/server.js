@@ -9,7 +9,6 @@ const swaggerIo = require('swagger-ui-express');
 const YAML = require("yamljs");
 const userApiSpecs = YAML.load("./docs/user-api-spec.yaml");
 const eventApiSpecs = YAML.load("./docs/event-api-spec.yaml");
-const performanceApiSpecs = YAML.load("./docs/performance-api-spec.yaml");
 
 // Load config and connect to the database
 dotenv.config();
@@ -30,7 +29,6 @@ app.get("/api-docs", (req, res) => {
           <ul>
               <li><a href="/api-docs/user">Users API Documentation</a></li>
               <li><a href="/api-docs/event">Events API Documentation</a></li>
-              <li><a href="/api-docs/performance">Performances API Documentation</a></li>
           </ul>
       </body>
   </html>`;
@@ -44,9 +42,6 @@ app.use("/api-docs/user", swaggerIo.serve, (req, res, next) => {
 app.use("/api-docs/event", swaggerIo.serve, (req, res, next) => {
   swaggerIo.setup(eventApiSpecs)(req, res, next);
 });
-app.use("/api-docs/performance", swaggerIo.serve, (req, res, next) => {
-  swaggerIo.setup(performanceApiSpecs)(req, res, next);
-});
 
 // Define the routes
 const userRoutes = require("./routes/userRoutes"); // User routes
@@ -54,9 +49,6 @@ app.use("/api/users", userRoutes);
 
 const eventRoutes = require("./routes/eventsRoutes"); // Event routes
 app.use("/api/events", eventRoutes);
-
-const performanceRoutes = require("./routes/performancesRoutes"); // Performance routes
-app.use("/api/performances", performanceRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");

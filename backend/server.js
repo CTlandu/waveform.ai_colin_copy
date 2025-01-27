@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const pool = require("./config/db"); // Import the connectDB function
 
 const swaggerIo = require('swagger-ui-express');
 const YAML = require("yamljs");

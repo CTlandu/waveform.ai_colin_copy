@@ -82,4 +82,20 @@ const deleteEvent = async (req, res) => {
     }
 }
 
+//put <backend-server>/api/events/:id/edit
+const editEvent = async (req, res) => {
+    const client = await pool.connect();
+    try{
+        
+        return
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({message: "Server Error"});
+    }finally{
+        client.release();
+    }
+
+}
+
 module.exports = {createEvent, getAllEvents, deleteEvent}; // Export the functions

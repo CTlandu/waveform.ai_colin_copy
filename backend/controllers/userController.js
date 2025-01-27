@@ -3,11 +3,25 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 
+function isValidEmail(email){
+    /*
+    Check if email is valid
+    */
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return re.test(email);
+}
+
 //post <backend-server>/api/users/register
 const registerUser = async (req, res) => {
     const client = await pool.connect();
     try {
         const { username, email, password } = req.body;
+
+        //Check if email is provided and valid
+        if (!email || !isValidEmail(email)) {
+            return res.status(400).json({ message: "Invalid email" });
+        }
 
         // Check if user exists
         const userCheck = await client.query(
@@ -20,7 +34,7 @@ const registerUser = async (req, res) => {
         }
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 12);
         
         // Insert user
         const result = await client.query(
@@ -145,7 +159,7 @@ const resetPassword = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const hashedPassword = await bcrypt.hash(new_password, 10);
+        const hashedPassword = await bcrypt.hash(new_password, 12);
 
         const result = await client.query(
             'UPDATE users SET password = $1 WHERE id = $2 RETURNING *',

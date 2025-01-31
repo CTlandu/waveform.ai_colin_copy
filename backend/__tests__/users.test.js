@@ -77,7 +77,7 @@ describe('User API Endpoints', () => {
     //after all tests are done, close the postgres connection
     afterAll(async () => {
         await pool.end();
-        console.log("Postgres connection closed");
+        //console.log("Postgres connection closed");
     });
 
 });

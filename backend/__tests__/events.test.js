@@ -19,7 +19,7 @@ describe('Events API Endpoints', () => {
 
     test("Get all events", async () => {
         const res = await request(app).get("/api/events/get");
-        console.log(res.body);
+        //console.log(res.body);
 
         expect(res.statusCode).toBe(200);
         expect(res.body.success).toBe(true);
@@ -74,6 +74,6 @@ describe('Events API Endpoints', () => {
 
     afterAll(async () => {
         await pool.end();
-        console.log("Postgres connection closed");
+        //console.log("Postgres connection closed");
     });
 });

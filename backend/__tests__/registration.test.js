@@ -6,6 +6,7 @@ const pool = require("../config/db");
 describe("Registration API", () => {
     let userId;
     let eventId;
+    let registeredUsers;
     //before all
     beforeAll(async () => {
         const userRes = await request(app).post("/api/users/register").send({
@@ -47,6 +48,14 @@ describe("Registration API", () => {
 
     });
 
+    //Get all registered users
+    test("Get registered users", async () => {
+        const res = await request(app).get(`/api/registration/${eventId}/get_registered_users`);
+        console.log(res.body);
+        expect(res.statusCode).toBe(200);
+        registeredUsers = res.body.result.length;
+    });
+
     //test unregistration
     test("Unregister from an event", async () => {
         const res = await request(app)
@@ -56,6 +65,15 @@ describe("Registration API", () => {
             });
         //console.log(res.body);
         expect(res.statusCode).toBe(200);
+    });
+
+    //Get all registered users after unregistering
+    test("Get registered users", async () => {
+        expect(registeredUsers).toBeDefined();
+        const res = await request(app).get(`/api/registration/${eventId}/get_registered_users`);
+        console.log(res.body);
+        expect(res.statusCode).toBe(200);
+        expect(res.body.result.length).toBe(registeredUsers - 1);
     });
 
     //after all

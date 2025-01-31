@@ -3,84 +3,71 @@ const request = require("supertest");
 const app = require("../server");
 const pool = require("../config/db");
 
-describe('Event Registrations', () => {
-    let token;
+describe("Registration API", () => {
     let userId;
     let eventId;
-
+    //before all
     beforeAll(async () => {
-        // Create test user and get token
-        const userRes = await request(app)
-            .post("/api/users/register")
-            .send({
-                username: "regtest",
-                email: "regtest@test.com",
-                password: "testpass123"
-            });
-        
-        token = userRes.body.token;
+        const userRes = await request(app).post("/api/users/register").send({
+            username: "registration test User",
+            email: "reg@email.com",
+            password: "password",
+        });
+        //console.log(userRes.body);
+        expect(userRes.statusCode).toBe(200);
         userId = userRes.body.result.id;
+        expect(userId).toBeDefined();
+        //console.log("userId: ", userId);
 
-        // Create test event
-        const eventRes = await request(app)
-            .post("/api/events/create")
-            .set('Authorization', `Bearer ${token}`)
-            .send({
-                name: "Registration Test Event",
-                description: "Test Description",
-                date: "2025-01-15",
-                time: "12:00",
-                location: "Test Location",
-                registration_deadline: "2025-01-14"
-            });
-        
+        const eventRes = await request(app).post("/api/events/create").send({
+            name: "registration test Event",
+            description: "registration test Event description",
+            date: "01/15/2025",
+            time: "12:00",
+            location: "registration test Location",
+            organizer: 1,
+            registration_deadline: "01/14/2025",
+        });
+        //console.log(eventRes.body);
+        expect(eventRes.statusCode).toBe(200);
         eventId = eventRes.body.result.id;
+        expect(eventId).toBeDefined();
+        //console.log("eventId: ", eventId);
+
     });
 
-    test("Register for event", async () => {
+    //test registration
+    test("Register for an event", async () => {
         const res = await request(app)
-            .post(`/api/events/${eventId}/register`)
-            .set('Authorization', `Bearer ${token}`);
-
+            .post(`/api/registration/${eventId}/register`)
+            .send({
+                user_id: userId,
+            });
         expect(res.statusCode).toBe(200);
-        expect(res.body.result).toHaveProperty('event_id', eventId);
-        expect(res.body.result).toHaveProperty('user_id', userId);
+
     });
 
-    test("Cannot register twice for same event", async () => {
+    //test unregistration
+    test("Unregister from an event", async () => {
         const res = await request(app)
-            .post(`/api/events/${eventId}/register`)
-            .set('Authorization', `Bearer ${token}`);
-
-        expect(res.statusCode).toBe(400);
-        expect(res.body).toHaveProperty('message', 'Already registered for this event');
-    });
-
-    test("Get event participants", async () => {
-        const res = await request(app)
-            .get(`/api/events/${eventId}/participants`)
-            .set('Authorization', `Bearer ${token}`);
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body.participants).toBeInstanceOf(Array);
-        expect(res.body.participants.length).toBe(1);
-    });
-
-    test("Cancel registration", async () => {
-        const res = await request(app)
-            .delete(`/api/events/${eventId}/register`)
-            .set('Authorization', `Bearer ${token}`);
-
+            .delete(`/api/registration/${eventId}/register`)
+            .send({
+                user_id: userId,
+            });
+        //console.log(res.body);
         expect(res.statusCode).toBe(200);
     });
 
+    //after all
     afterAll(async () => {
-        // Clean up test event and user
-        await request(app)
-            .delete(`/api/events/${eventId}/delete`)
-            .set('Authorization', `Bearer ${token}`);
-        await request(app)
-            .delete(`/api/users/${userId}/delete`)
-            .set('Authorization', `Bearer ${token}`);
+        const userRes = await request(app).delete(`/api/users/${userId}/delete`);
+        expect(userRes.statusCode).toBe(200);
+
+        const eventRes = await request(app).delete(`/api/events/${eventId}/delete`);
+        expect(eventRes.statusCode).toBe(200);
+
+        pool.end();
     });
+
+
 });

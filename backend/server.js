@@ -49,6 +49,9 @@ app.use("/api/users", userRoutes);
 const eventRoutes = require("./routes/eventsRoutes"); // Event routes
 app.use("/api/events", eventRoutes);
 
+const registrationRoutes = require("./routes/registrationRoutes"); // Registration routes
+app.use("/api/registration", registrationRoutes);
+
 app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");
 });

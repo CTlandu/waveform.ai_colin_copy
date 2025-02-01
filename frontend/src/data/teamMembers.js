@@ -7,6 +7,8 @@ import michaelCampagna from "../assets/folks/Michael.jpg";
 import russellBurns from "../assets/folks/Russell.jpg";
 import grettaAnderson from "../assets/folks/Gretta.jpg";
 import finnurCricco from "../assets/folks/Finnur.jpg";
+import alanGonzalez from "../assets/folks/Alan.jpg";
+import colintang from "../assets/folks/Colin.jpg";
 
 export const teamMembers = [
   {
@@ -80,5 +82,21 @@ export const teamMembers = [
     image: finnurCricco,
     description:
       "Finnur Cricco is a sophomore EPAD student combining music, art, and electronics expertise.",
+  },
+  {
+    id: 10,
+    name: "Alan Gonzalez",
+    role: "Web Developer (Backend)",
+    image: alanGonzalez,
+    description:
+      "Alan Gonzalez is a Junior studying Computer Science and Applied Math and passionate about AI/ML and Software Engineering",
+  },
+  {
+    id: 11,
+    name: "Colin Tang",
+    role: "Web Developer (Frontend)",
+    image: colintang,
+    description:
+      "Colin Tang is a Senior studying Computer Science and Arts and is passionate about software development and Human-Computer Interaction",
   },
 ];

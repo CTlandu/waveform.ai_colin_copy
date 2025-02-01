@@ -6,10 +6,15 @@ const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // Separate core team and web developers
+  const coreTeamMembers = teamMembers.slice(0, -2);
+  const webDevs = teamMembers.slice(-2);
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
       setMembers(generatePositions(window.innerWidth));
+      setWebDevPositions(generateWebDevPositions(window.innerWidth));
     };
 
     window.addEventListener("resize", handleResize);
@@ -22,8 +27,8 @@ const TeamPage = () => {
 
     if (isSmallScreen) {
       // Grid layout for mobile (2 columns, last item centered)
-      return teamMembers.map((member, index) => {
-        const isLastItem = index === teamMembers.length - 1;
+      return coreTeamMembers.map((member, index) => {
+        const isLastItem = index === coreTeamMembers.length - 1;
         const row = Math.floor(index / 2);
         const col = index % 2;
 
@@ -62,15 +67,15 @@ const TeamPage = () => {
             { x: 85, y: 25 },
           ];
 
-      return teamMembers.map((member, index) => {
+      return coreTeamMembers.map((member, index) => {
         const pointIndex = Math.floor(
-          (index * (wPoints.length - 1)) / (teamMembers.length - 1)
+          (index * (wPoints.length - 1)) / (coreTeamMembers.length - 1)
         );
         const nextPointIndex = Math.min(pointIndex + 1, wPoints.length - 1);
 
         const progress =
-          ((index * (wPoints.length - 1)) % (teamMembers.length - 1)) /
-          (teamMembers.length - 1);
+          ((index * (wPoints.length - 1)) % (coreTeamMembers.length - 1)) /
+          (coreTeamMembers.length - 1);
 
         const left =
           wPoints[pointIndex].x +
@@ -89,14 +94,31 @@ const TeamPage = () => {
     }
   };
 
+  // Simple horizontal layout for web developers
+  const generateWebDevPositions = (screenWidth) => {
+    const isSmallScreen = screenWidth < 768;
+
+    return webDevs.map((member, index) => ({
+      ...member,
+      left: isSmallScreen
+        ? 30 + index * 40 // 30%, 70% for mobile
+        : 35 + index * 30, // More centered for desktop
+      top: 15, // Consistent top position within their container
+      animationDelay: Math.random() * 2,
+    }));
+  };
+
   const [members, setMembers] = useState(generatePositions(window.innerWidth));
+  const [webDevPositions, setWebDevPositions] = useState(
+    generateWebDevPositions(window.innerWidth)
+  );
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-primary-10 to-primary-30 overflow-hidden">
       <FloatingBubbles />
 
-      {/* Further increased container height and adjusted padding */}
-      <div className="relative w-full h-[1600px] md:h-[800px] lg:h-[800px] mx-auto max-w-6xl px-4 md:px-6">
+      {/* Core Team Container */}
+      <div className="relative w-full h-[800px] md:h-[800px] lg:h-[800px] mx-auto max-w-6xl px-4 md:px-6">
         {members.map((member) => (
           <div
             key={member.id}
@@ -145,6 +167,60 @@ const TeamPage = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Web Developers Section */}
+      <div className="relative w-full h-[300px] mx-auto max-w-6xl px-4 md:px-6">
+        <h3 className="text-center text-white text-xl font-semibold mb-12">
+          Website Developers
+        </h3>
+        <div className="relative h-full">
+          {webDevPositions.map((member) => (
+            <div
+              key={member.id}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 
+                       transition-all duration-[3000ms] ease-in-out hover:z-10"
+              style={{
+                left: `${member.left}%`,
+                top: `${member.top}%`,
+                animation:
+                  windowWidth >= 768
+                    ? `float-member ${
+                        3 + member.animationDelay
+                      }s ease-in-out infinite`
+                    : "none",
+              }}
+            >
+              <div
+                className="group relative cursor-pointer"
+                onClick={() => setSelectedMember(member)}
+              >
+                <div
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-28 md:h-28 lg:w-32 lg:h-32 
+                              rounded-full overflow-hidden border-4 border-primary-50/30 
+                              hover:border-primary-50 transition-all duration-300 
+                              bg-primary-20/50 backdrop-blur-sm"
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div
+                  className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 
+                              text-center whitespace-nowrap"
+                >
+                  <p className="text-sm font-medium mb-1 text-white">
+                    {member.name}
+                  </p>
+                  <p className="text-xs text-primary-90/70">{member.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Modal */}

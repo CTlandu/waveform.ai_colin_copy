@@ -20,8 +20,14 @@ const WebsiteDevelopers = ({ members, windowWidth, onMemberClick }) => {
   }, [windowWidth, members]);
 
   return (
-    <div className="relative w-full h-[400px] mx-auto max-w-6xl px-4 md:px-6 mt-12">
-      <h3 className="text-center text-white text-xl font-semibold mb-24">
+    <div
+      className="relative w-full h-[250px] mx-auto max-w-6xl px-4 md:px-6 
+                  mt-16 sm:mt-12 md:mt-8 lg:mt-0"
+    >
+      <h3
+        className="text-center text-white text-xl font-semibold 
+                    mb-6 sm:mb-1 md:mb-6"
+      >
         Website Developers
       </h3>
       <div className="relative h-full">

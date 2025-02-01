@@ -81,6 +81,13 @@ const CoreMembers = ({ members, windowWidth, onMemberClick }) => {
 
   return (
     <div className="relative w-full h-[800px] mx-auto max-w-6xl px-4 md:px-6">
+      <h3
+        className="text-center text-white text-xl font-semibold 
+                    mt-24"
+      >
+        Core Team
+      </h3>
+
       {positions.map((member) => (
         <MemberCard
           key={member.id}

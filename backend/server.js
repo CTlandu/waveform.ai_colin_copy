@@ -3,12 +3,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const pool = require("./config/db"); // Import the connectDB function
 
 const swaggerIo = require('swagger-ui-express');
 const YAML = require("yamljs");
 const userApiSpecs = YAML.load("./docs/user-api-spec.yaml");
 const eventApiSpecs = YAML.load("./docs/event-api-spec.yaml");
+const registrationApiSpecs = YAML.load("./docs/registration-api-spec.yaml");
 
 // Load config and connect to the database
 dotenv.config();
@@ -29,6 +29,7 @@ app.get("/api-docs", (req, res) => {
           <ul>
               <li><a href="/api-docs/user">Users API Documentation</a></li>
               <li><a href="/api-docs/event">Events API Documentation</a></li>
+              <li><a href="/api-docs/registration">Registration API Documentation</a></li>
           </ul>
       </body>
   </html>`;
@@ -42,6 +43,9 @@ app.use("/api-docs/user", swaggerIo.serve, (req, res, next) => {
 app.use("/api-docs/event", swaggerIo.serve, (req, res, next) => {
   swaggerIo.setup(eventApiSpecs)(req, res, next);
 });
+app.use("/api-docs/registration", swaggerIo.serve, (req, res, next) => {
+  swaggerIo.setup(registrationApiSpecs)(req, res, next);
+});
 
 // Define the routes
 const userRoutes = require("./routes/userRoutes"); // User routes
@@ -49,6 +53,9 @@ app.use("/api/users", userRoutes);
 
 const eventRoutes = require("./routes/eventsRoutes"); // Event routes
 app.use("/api/events", eventRoutes);
+
+const registrationRoutes = require("./routes/registrationRoutes"); // Registration routes
+app.use("/api/registration", registrationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the WaveForm.ai backend server!");

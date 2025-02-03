@@ -5,7 +5,7 @@ const { registerForEvent, unregisterFromEvent, getRegisteredUsers } = require(".
 const router = express.Router();
 
 router.post("/:eventId/register", registerForEvent);
-router.delete("/:eventId/register", unregisterFromEvent);
-router.get("/:eventId/get_registered_users", getRegisteredUsers);
+router.delete("/:eventId/unregister", unregisterFromEvent);
+router.get("/:eventId/participants", getRegisteredUsers);
 
 module.exports = router;

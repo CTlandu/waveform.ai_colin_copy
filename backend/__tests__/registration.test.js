@@ -50,7 +50,7 @@ describe("Registration API", () => {
 
     //Get all registered users
     test("Get registered users", async () => {
-        const res = await request(app).get(`/api/registration/${eventId}/get_registered_users`);
+        const res = await request(app).get(`/api/registration/${eventId}/participants`);
         console.log(res.body);
         expect(res.statusCode).toBe(200);
         registeredUsers = res.body.result.length;
@@ -59,7 +59,7 @@ describe("Registration API", () => {
     //test unregistration
     test("Unregister from an event", async () => {
         const res = await request(app)
-            .delete(`/api/registration/${eventId}/register`)
+            .delete(`/api/registration/${eventId}/unregister`)
             .send({
                 user_id: userId,
             });
@@ -70,7 +70,7 @@ describe("Registration API", () => {
     //Get all registered users after unregistering
     test("Get registered users", async () => {
         expect(registeredUsers).toBeDefined();
-        const res = await request(app).get(`/api/registration/${eventId}/get_registered_users`);
+        const res = await request(app).get(`/api/registration/${eventId}/participants`);
         console.log(res.body);
         expect(res.statusCode).toBe(200);
         expect(res.body.result.length).toBe(registeredUsers - 1);

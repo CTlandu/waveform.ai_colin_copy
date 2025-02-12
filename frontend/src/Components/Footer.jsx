@@ -1,20 +1,103 @@
+import { Link } from "react-router-dom";
+import { FaEnvelope } from "react-icons/fa"; // 需要安装 react-icons
+import wmLogo from "../assets/wm-logo.png";
+
 const Footer = () => {
   return (
     <footer className="bg-primary-30 py-12 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Logo and Title Section */}
-        <div className="mb-8">
-          <h2 className="text-white text-4xl font-bold mb-2">Waveform.ai</h2>
-          <h3 className="text-white text-2xl">The College of William & Mary</h3>
+      <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+        {/* Logo, Title and Email Section */}
+        <div className="mb-8 flex flex-col items-center">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-white text-4xl font-bold">Waveform.ai</h2>
+            <a
+              href="mailto:waveformai@wm.edu"
+              className="text-white hover:text-primary-50 transition-colors"
+              aria-label="Email us"
+            >
+              <FaEnvelope className="w-6 h-6" />
+            </a>
+          </div>
+          <a
+            href="https://www.wm.edu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 text-white text-2xl hover:text-primary-50 transition-colors mt-4"
+          >
+            <img
+              src={wmLogo}
+              alt="William & Mary Logo"
+              className="w-8 h-8 object-contain"
+            />
+            <span>William & Mary</span>
+          </a>
+        </div>
+
+        {/* Departments Section */}
+        <div className="mb-6">
+          <div className="flex items-center justify-center gap-2 text-white/80 text-lg">
+            <a
+              href="https://www.wm.edu/as/physics/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Physics Department
+            </a>
+            <span>×</span>
+            <a
+              href="https://www.wm.edu/as/music/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Music Department
+            </a>
+          </div>
+        </div>
+
+        {/* Project Information */}
+        <div className="space-y-2 text-white/70">
+          <div>
+            A project for{" "}
+            <a
+              href="https://www.wm.edu/offices/facultyaffairs/careers/awards-opportunities/art-science-exchange/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              Arts and Science Exchange (ASE)
+            </a>
+          </div>
+          <div className="text-white/70">
+            For the{" "}
+            <a
+              href="https://www.wm.edu/as/arts/year-of-the-arts/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              Year of the Arts
+            </a>{" "}
+            at William & Mary, sponsored by{" "}
+            <a
+              href="https://www.wm.edu/about/administration/provost/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              Office of the Provost
+            </a>
+          </div>
         </div>
 
         {/* Decorative Line */}
-        <div className="relative">
+        <div className="relative mt-8 w-full max-w-3xl">
           {/* Background line */}
           <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-primary-50/30" />
 
           {/* Dots */}
-          <div className="relative flex justify-between max-w-3xl">
+          <div className="relative flex justify-between">
             {[...Array(5)].map((_, index) => (
               <div
                 key={index}

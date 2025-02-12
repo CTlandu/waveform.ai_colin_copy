@@ -35,22 +35,34 @@ const Navbar = () => {
         {/* Desktop navigation links */}
         <div className="hidden md:flex items-center space-x-8">
           <Link
-            to="/vision"
+            to="/premiere"
             className="text-white hover:text-primary-50 transition-colors"
           >
-            Vision
+            Premiere
           </Link>
           <Link
-            to="/technology"
+            to="/workshops"
             className="text-white hover:text-primary-50 transition-colors"
           >
-            Our Technology
+            Workshops
+          </Link>
+          <Link
+            to="/tour"
+            className="text-white hover:text-primary-50 transition-colors"
+          >
+            Tour
           </Link>
           <Link
             to="/team"
             className="text-white hover:text-primary-50 transition-colors"
           >
             Our Team
+          </Link>
+          <Link
+            to="/contact"
+            className="text-white hover:text-primary-50 transition-colors"
+          >
+            Contact
           </Link>
         </div>
 
@@ -86,7 +98,7 @@ const Navbar = () => {
         </div>
 
         {/* RSVP button */}
-        <div className="relative">
+        {/* <div className="relative">
           <button className="flex items-center bg-white rounded-full pl-12 pr-6 py-2 hover:bg-gray-100 transition-colors">
             <div className="absolute left-0 top-1/2 -translate-y-1/2">
               <div className="w-10 h-10 rounded-full bg-primary-10 flex items-center justify-center">
@@ -99,7 +111,7 @@ const Navbar = () => {
             </div>
             <span className="text-primary-10 font-medium">RSVP</span>
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Mobile menu dropdown */}

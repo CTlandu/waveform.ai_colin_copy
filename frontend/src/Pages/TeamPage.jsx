@@ -3,6 +3,7 @@ import FloatingBubbles from "../Components/FloatingBubbles";
 import { teamMembers } from "../data/teamMembers";
 import CoreMembers from "../Components/CoreMembers";
 import WebsiteDevelopers from "../Components/WebsiteDevelopers";
+import { FaEnvelope, FaGlobe, FaLinkedin } from "react-icons/fa";
 
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -65,6 +66,49 @@ const TeamPage = () => {
                 <h3 className="text-lg md:text-xl text-primary-90/80 mb-4">
                   {selectedMember.role}
                 </h3>
+
+                {/* Social Links */}
+                <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
+                  {selectedMember.email && (
+                    <a
+                      href={`mailto:${selectedMember.email}`}
+                      className="text-primary-90/70 hover:text-primary-90 
+                               transition-colors flex items-center gap-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaEnvelope className="w-5 h-5" />
+                      <span className="text-sm">Email</span>
+                    </a>
+                  )}
+
+                  {selectedMember.website && (
+                    <a
+                      href={selectedMember.website}
+                      className="text-primary-90/70 hover:text-primary-90 
+                               transition-colors flex items-center gap-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaGlobe className="w-5 h-5" />
+                      <span className="text-sm">Website</span>
+                    </a>
+                  )}
+
+                  {selectedMember.linkedin && (
+                    <a
+                      href={selectedMember.linkedin}
+                      className="text-primary-90/70 hover:text-primary-90 
+                               transition-colors flex items-center gap-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="w-5 h-5" />
+                      <span className="text-sm">LinkedIn</span>
+                    </a>
+                  )}
+                </div>
+
                 <p className="text-white/80 leading-relaxed">
                   {selectedMember.description}
                 </p>

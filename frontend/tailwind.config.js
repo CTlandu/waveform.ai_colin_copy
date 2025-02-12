@@ -35,9 +35,28 @@ export default {
             opacity: "0",
           },
         },
+        "float-random": {
+          "0%": {
+            transform: "translateY(0) scale(0)",
+            opacity: "0",
+          },
+          "10%": {
+            transform: "translateY(0) scale(1)",
+            opacity: "1",
+          },
+          "90%": {
+            transform: "translateY(-200px) scale(1)",
+            opacity: "0.8",
+          },
+          "100%": {
+            transform: "translateY(-250px) scale(0)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         float: "float 20s linear infinite",
+        "float-random": "float-random 8s ease-out forwards",
       },
     },
   },

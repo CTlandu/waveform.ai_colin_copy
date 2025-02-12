@@ -1,67 +1,72 @@
+import { useState, useEffect } from "react";
+
 const FloatingBubbles = () => {
-  // Define three different bubble sizes
+  const [bubbles, setBubbles] = useState([]);
+
   const bubbleSizes = [
-    { width: "30px", height: "30px" }, // Small bubble
-    { width: "40px", height: "40px" }, // Medium bubble
-    { width: "50px", height: "50px" }, // Large bubble
+    { width: "30px", height: "30px" },
+    { width: "40px", height: "40px" },
+    { width: "50px", height: "50px" },
   ];
 
-  // Create bubbles with random effects
-  const createBubbles = () => {
-    const bubbles = [];
-    const numColumns = 5; // Divide screen into 5 columns
-    const bubblesPerColumn = 3; // 3 bubbles per column
+  // 创建单个泡泡
+  const createBubble = () => {
+    // 随机位置，避开边缘 (10% - 90%)
+    const left = 10 + Math.random() * 80;
+    // 随机起始高度 (20% - 80%)
+    const top = 20 + Math.random() * 60;
 
-    for (let col = 0; col < numColumns; col++) {
-      for (let row = 0; row < bubblesPerColumn; row++) {
-        // Calculate left position with slight random offset for natural look
-        const leftPosition = `${col * 20 + Math.random() * 10}%`;
-        const size =
-          bubbleSizes[Math.floor(Math.random() * bubbleSizes.length)];
+    const size = bubbleSizes[Math.floor(Math.random() * bubbleSizes.length)];
+    const gradientAngle = Math.floor(Math.random() * 360);
+    const gradientStart = Math.floor(Math.random() * 10 + 15);
+    const gradientEnd = Math.floor(Math.random() * 5 + 5);
 
-        // Generate random gradient angle and positions for each bubble
-        const gradientAngle = Math.floor(Math.random() * 360);
-        const gradientStart = Math.floor(Math.random() * 10 + 15); // 15-25%
-        const gradientEnd = Math.floor(Math.random() * 5 + 5); // 5-10%
-
-        bubbles.push({
-          ...size,
-          left: leftPosition,
-          animationDelay: `${(col + row) * 0.8}s`,
-          animationDuration: "20s",
-          gradientStyle: {
-            background: `linear-gradient(${gradientAngle}deg, 
-                        rgba(0, 235, 236, ${gradientStart}%) ${gradientEnd}%, 
-                        rgba(0, 155, 156, 0.05) 100%)`,
-            boxShadow: `
-              inset -1px -1px 2px rgba(0, 0, 0, 0.03),
-              inset 1px 1px 2px rgba(0, 235, 236, 0.05),
-              0 0 8px rgba(0, 235, 236, 0.03)
-            `,
-            backdropFilter: "blur(1px)",
-          },
-        });
-      }
-    }
-    return bubbles;
+    return {
+      id: Date.now() + Math.random(), // 唯一ID
+      ...size,
+      left: `${left}%`,
+      top: `${top}%`,
+      gradientStyle: {
+        background: `linear-gradient(${gradientAngle}deg, 
+                    rgba(0, 235, 236, ${gradientStart}%) ${gradientEnd}%, 
+                    rgba(0, 155, 156, 0.05) 100%)`,
+        boxShadow: `
+          inset -1px -1px 2px rgba(0, 0, 0, 0.03),
+          inset 1px 1px 2px rgba(0, 235, 236, 0.05),
+          0 0 8px rgba(0, 235, 236, 0.03)
+        `,
+        backdropFilter: "blur(1px)",
+      },
+    };
   };
+
+  useEffect(() => {
+    // 每秒生成一个新泡泡
+    const intervalId = setInterval(() => {
+      setBubbles((prevBubbles) => {
+        // 保持最多 8 个泡泡
+        const newBubbles = [...prevBubbles, createBubble()].slice(-8);
+        return newBubbles;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {createBubbles().map((bubble, index) => (
+      {bubbles.map((bubble) => (
         <div
-          key={index}
-          className="absolute rounded-full animate-float"
+          key={bubble.id}
+          className="absolute rounded-full animate-float-random"
           style={{
             width: bubble.width,
             height: bubble.height,
             left: bubble.left,
-            animationDelay: bubble.animationDelay,
-            animationDuration: bubble.animationDuration,
+            top: bubble.top,
             ...bubble.gradientStyle,
           }}
         >
-          {/* Add a highlight spot */}
           <div
             className="absolute w-[40%] h-[40%] rounded-full"
             style={{

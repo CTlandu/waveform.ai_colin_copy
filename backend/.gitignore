@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+
+# Environment files
+.env
+
+# Logs
+logs/
+*.log
+
+# Debugging tools
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+dump.rdb
+
+# OS-specific files
+.DS_Store
+Thumbs.db

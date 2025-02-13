@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: Registrations API
+  description: API documentation for managing event registrations.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+
+paths:
+  /registration/{eventId}/register:
+    post:
+      summary: Register a user for an event
+      parameters:
+        - in: path
+          name: eventId
+          required: true
+          schema:
+            type: string
+          description: The ID of the event to register for
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: integer
+                  description: ID of the user to register
+                  example: 123
+      responses:
+        '200':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  result:
+                    $ref: '#/components/schemas/Registration'
+        '400':
+          description: Already registered or bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Already registered for this event
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+
+  /registration/{eventId}/unregister:
+    delete:
+      summary: Unregister a user from an event
+      parameters:
+        - in: path
+          name: eventId
+          required: true
+          schema:
+            type: string
+          description: The ID of the event to unregister from
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: integer
+                  description: ID of the user to unregister
+                  example: 123
+      responses:
+        '200':
+          description: User unregistered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  result:
+                    $ref: '#/components/schemas/Registration'
+                  message:
+                    type: string
+                    example: Unregistered successfully
+        '404':
+          description: Registration not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Registration not found
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+
+  /registration/{eventId}/participants:
+    get:
+      summary: Get users registered for an event
+      parameters:
+        - in: path
+          name: eventId
+          required: true
+          schema:
+            type: string
+          description: The ID of the event
+      responses:
+        '200':
+          description: List of registered users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request - Event ID not provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Event ID not provided
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    Registration:
+      type: object
+      properties:
+        event_id:
+          type: integer
+          example: 1
+        user_id:
+          type: integer
+          example: 123
+        status:
+          type: string
+          example: confirmed
+        registered_at:
+          type: string
+          format: date-time

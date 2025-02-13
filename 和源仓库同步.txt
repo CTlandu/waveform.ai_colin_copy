@@ -1,0 +1,15 @@
+# 1. 确保你在正确的分支上
+git branch  # 查看当前分支
+
+# 2. 获取上游更新
+git fetch upstream
+
+# 3. 合并上游更改（使用 --allow-unrelated-histories）
+git merge upstream/main --allow-unrelated-histories
+
+# 4. 如果有冲突，解决冲突后：
+git add .
+git commit -m "Merge upstream changes"
+
+# 5. 推送到你的仓库
+git push origin main

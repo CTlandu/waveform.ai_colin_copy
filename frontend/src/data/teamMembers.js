@@ -1,4 +1,4 @@
-import ranYang from "../assets/folks/Ran.jpg";
+import ranYang from "../assets/folks/Ran.jpeg";
 import benWhiting from "../assets/folks/Benjamin.png";
 import melodyChua from "../assets/folks/Melody.jpg";
 import rahulPamadi from "../assets/folks/Rahul.jpg";

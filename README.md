@@ -59,3 +59,19 @@ From there, you can find links to the specific API documentation pages:
 
 - `<backend-server>/api-docs/event`  
   Documentation for managing events in the system.
+
+## Running Using Docker/Podman
+
+After installing [Docker Deskop](https://docs.docker.com/desktop/), you're able to
+run the components here in the same way as things will run on IT servers.
+
+After cloning this repository run `docker compose build` to build the container
+images.
+
+Then run `docker compose up` to start the frontend, backend, and a MySQL compatible
+database.
+
+The backend will automatically be configured to connect to the database.
+
+After making changes be sure to run `docker compose build` again to ensure the
+latest image is being used.

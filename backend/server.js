@@ -17,7 +17,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000;
 
 // Landing page for API documentation
 app.get("/api-docs", (req, res) => {
@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
 // Start the server only if this file is run directly
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is listening on port ${PORT}`);
   });
 }
 

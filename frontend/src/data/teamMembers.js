@@ -112,14 +112,14 @@ export const teamMembers = [
   },
   {
     id: 10,
-    name: "Alan Gonzalez",
+    name: "Alan Gonzalez Osorio",
     role: "Backend Engineer",
     image: alanGonzalez,
     description:
       "Alan Gonzalez is a Junior studying Computer Science and Applied Math and passionate about AI/ML and Software Engineering",
     email: "alan.gonzalez@example.com",
     website: "https://example.com",
-    linkedin: "https://linkedin.com/in/alan-gonzalez",
+    linkedin: "https://www.linkedin.com/in/alan-gonzalez-osorio/",
   },
   {
     id: 11,

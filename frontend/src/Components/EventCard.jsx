@@ -22,14 +22,14 @@ const EventCard = ({ event, onClose }) => {
           <img
             src={event.image || "https://via.placeholder.com/400"}
             alt={event.title}
-            className="h-38 object-cover rounded-md"
+            className="h-36 object-cover rounded-md"
           />
           <h2 className="text-xl font-bold text-cyan-900 mt-3">{event.title}</h2>
           <p className="text-sm text-gray-700 mt-2">{event.date}</p>
           <p className="text-md text-gray-800 mt-2">{event.description}</p>
   
           {/* External Link */}
-          <Link to="/register" className="mt-4 inline-block bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 transition">
+          <Link to={`/register?id=${event.id}&title=${event.title}`} className="mt-4 inline-block bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 transition">
             Register for Event
           </Link>
           

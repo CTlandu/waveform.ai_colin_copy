@@ -1,28 +1,45 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const RegistrationPage = () => {
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    
+    const eventId = query.get("id");
+    const eventName = query.get("title");
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [event, setEvent] = useState("Select an Event");
+    const [selectedEvent, setSelectedEvent] = useState("");
 
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setSubmitted(true);
-    };
 
-    const handleEventChange = (e) => {
-        setEvent(e.target.value);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:5000/api/registration/${eventId}/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, phone, event: selectedEvent }),
+            });
+            if (response.ok) setSubmitted(true);
+        } catch (err) {
+            console.error(err);
+        }
     };
+    
 
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="border p-6 rounded-lg shadow-md bg-white w-full max-w-md">
                 <h2 className="text-3xl font-semibold text-cyan-900 mb-6 text-center">
-                    Register
+                    Registering For
                 </h2>
+                <h3 className="text-xl font-semibold text-cyan-900 mb-6 text-center">
+                    {eventName}
+                </h3>
                 
                 <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
                     {!submitted && (
@@ -58,16 +75,6 @@ const RegistrationPage = () => {
                             onChange={(e) => setPhone(e.target.value)}
                             className="border rounded p-2 mt-1"
                         />
-                    </div>
-                    
-                    <div className="flex flex-col">
-                        <label className='font-medium'>Event registering for:</label>
-                        <select value={event} onChange={handleEventChange} className='border rounded p-2 mt-1'>
-                            <option value="Choose an Event" disabled>Choose an Event</option>
-                            <option value="Waveform ai Premier">Waveform ai Premier</option>
-                            <option value="Sample Event 1">Sample Event 1</option>
-                            <option value="Sample Event 2">Sample Event 2</option>
-                        </select>
                     </div>
 
                     <button 

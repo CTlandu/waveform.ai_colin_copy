@@ -13,25 +13,25 @@ import colintang from "../assets/folks/Colin.jpg";
 export const teamMembers = [
   {
     id: 1,
-    name: "Dr. Ran Yang",
-    role: "Producer",
+    name: "Ran Yang",
+    role: "Exec Producer/Lead Tech",
     image: ranYang,
     description:
       "Prof. Ran Yang leads production and technical development, bringing 20 years of higher education experience in physics and electrical engineering with AI applications in sound design and medical technologies.",
-    email: "ran.yang@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/ran-yang",
+    // email: "ran.yang@example.com",
+    // website: "https://example.com",
+    // linkedin: "https://linkedin.com/in/ran-yang",
   },
   {
     id: 2,
-    name: "Dr. Ben Whiting",
-    role: "Arts Director",
+    name: "Benjamin D. Whiting",
+    role: "Artistic Designer",
     image: benWhiting,
     description:
       "Prof. Ben Whiting serves as Music and Artistic Director, an internationally award-winning composer who explores technological innovations to enhance musical expression through his work with numerous prestigious festivals and organizations.",
-    email: "ben.whiting@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/ben-whiting",
+    // email: "ben.whiting@example.com",
+    // website: "https://example.com",
+    // linkedin: "https://linkedin.com/in/ben-whiting",
   },
   {
     id: 3,
@@ -41,8 +41,8 @@ export const teamMembers = [
     description:
       "Melody Chua is an international transdisciplinary artist and flutist who creates innovative performances with sensor-augmented instruments and interactive installations, currently pursuing doctoral research on improvisation machines at Kunstuniversität Graz and Zürich University of the Arts.",
     email: "melody.chua@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/melody-chua",
+    // website: "https://example.com",
+    // linkedin: "https://linkedin.com/in/melody-chua",
   },
   {
     id: 4,
@@ -51,9 +51,9 @@ export const teamMembers = [
     image: rahulPamadi,
     description:
       "Rahul Pamadi is a senior EPAD student specializing in analog electronics and audio systems.",
-    email: "rahul.pamadi@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/rahul-pamadi",
+    email: "rkpamadi@wm.edu",
+    // website: "https://example.com",
+    linkedin: "https://www.linkedin.com/in/rahul-pamadi-ab0539241",
   },
   {
     id: 5,
@@ -62,9 +62,9 @@ export const teamMembers = [
     image: connorMartin,
     description:
       "Connor Martin is a senior EPAD student focused on vintage electronics, computer systems and musical interfaces.",
-    email: "connor.martin@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/connor-martin",
+    email: "cemartin02@wm.edu",
+    website: "https://majorcadencetech.org",
+    // linkedin: "https://linkedin.com/in/connor-martin",
   },
   {
     id: 6,
@@ -73,9 +73,9 @@ export const teamMembers = [
     image: michaelCampagna,
     description:
       "Michael Campagna is a junior math and physics student exploring AI in sound design.",
-    email: "michael.campagna@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/michael-campagna",
+    // email: "michael.campagna@example.com",
+    // website: "https://example.com",
+    // linkedin: "https://linkedin.com/in/michael-campagna",
   },
   {
     id: 7,
@@ -84,9 +84,9 @@ export const teamMembers = [
     image: russellBurns,
     description:
       "Russell Burns is a senior EPAD student with expertise in hardware and algorithms.",
-    email: "russell.burns@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/russell-burns",
+    email: "raburns@wm.edu",
+    website: "https://russburns.github.io",
+    linkedin: "www.linkedin.com/in/raburns",
   },
   {
     id: 8,
@@ -95,20 +95,20 @@ export const teamMembers = [
     image: grettaAnderson,
     description:
       "Gretta Anderson is a freshman physics student bringing visual arts experience to the team.",
-    email: "gretta.anderson@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/gretta-anderson",
+    email: "gjanderson01@wm.edu",
+    // website: "https://example.com",
+    linkedin: "https://www.linkedin.com/in/gretta-anderson-459191293",
   },
   {
     id: 9,
-    name: "Finnur Cricco",
+    name: "Finnur Oddsson Cricco",
     role: "3D Designer",
     image: finnurCricco,
     description:
       "Finnur Cricco is a sophomore EPAD student combining music, art, and electronics expertise.",
-    email: "finnur.cricco@example.com",
-    website: "https://example.com",
-    linkedin: "https://linkedin.com/in/finnur-cricco",
+    // email: "finnur.cricco@example.com",
+    // website: "https://example.com",
+    // linkedin: "https://linkedin.com/in/finnur-cricco",
   },
   {
     id: 10,

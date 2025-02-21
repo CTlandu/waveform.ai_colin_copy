@@ -112,7 +112,30 @@ const editEvent = async (req, res) => {
         client.release();
     }
 };
-    
 
+//get <backend-server>/api/events/:id/get
+const getEventById = async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const { id } = req.params;
 
-module.exports = {createEvent, getAllEvents, deleteEvent}; // Export the functions
+        if (!id) {
+            return res.status(400).json({ success: false, message: "Event ID is required." });
+        }
+
+        const event = await client.query('SELECT * FROM events WHERE id = $1', [id]);
+        if (event.rows.length === 0) {
+            return res.status(404).json({ success: false, message: "Event not found." });
+        }
+
+        res.status(200).json({ success: true, result: event.rows[0] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Server Error" });
+    } finally {
+        client.release();
+    }
+
+}
+
+module.exports = {createEvent, getAllEvents, deleteEvent, getEventById}; // Export the functions

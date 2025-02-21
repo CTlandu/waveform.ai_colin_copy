@@ -29,7 +29,7 @@ const EventCard = ({ event, onClose }) => {
           <p className="text-md text-gray-800 mt-2">{event.description}</p>
   
           {/* External Link */}
-          <Link to={`/register?id=${event.id}&title=${event.title}`} className="mt-4 inline-block bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 transition">
+          <Link to={`/register?id=${event.id}`} className="mt-4 inline-block bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 transition">
             Register for Event
           </Link>
           

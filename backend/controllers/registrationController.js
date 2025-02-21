@@ -4,24 +4,19 @@ const registerForEvent = async (req, res) => {
     const client = await pool.connect();
 
     try {
-        const userId = req.body.user_id;
-        const { eventId } = req.params;
+        const event_id = req.params.eventId;
+        const { name, email, phone } = req.body;
 
-        const registrationCheck = await client.query(
-            'SELECT * FROM registrations WHERE event_id = $1 AND user_id = $2',
-            [eventId, userId]
-        );
+        if (!event_id) return res.status(400).json({ success: false, message: "Event ID not provided" });
+        if (!name || !email || !phone) return res.status(400).json({ success: false, message: "Missing required fields" });
 
-        if (registrationCheck.rows.length) {
-            return res.status(400).json({ success: false, message: "Already registered for this event" });
-        }
+        const result = await pool.query(
+            'INSERT INTO registrations (event_id, name, email, phone) VALUES ($1, $2, $3, $4)',
+            [event_id, name, email, phone]
+          );
 
-        const result = await client.query(
-            'INSERT INTO registrations (event_id, user_id, status, registered_at) VALUES ($1, $2, $3, NOW()) RETURNING *',
-            [eventId, userId, 'confirmed']
-        );
+        res.status(200).json({ success: true, result: result.rows[0], message: "Registered successfully" });
 
-        res.status(200).json({ success: true, result: result.rows[0] });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server Error" });
@@ -54,31 +49,4 @@ const unregisterFromEvent = async (req, res) => {
     }
 };
 
-const getRegisteredUsers = async (req, res) => {
-    const client = await pool.connect();
-    try{
-        const { eventId } = req.params;
-
-        if (!eventId) return res.status(400).json({ success: false, message: "Event ID not provided" });
-
-        const result = await client.query(
-            `SELECT u.*
-            FROM users u
-            JOIN registrations r ON u.id = r.user_id
-            WHERE r.event_id = $1`,
-            [eventId]
-        )
-
-        res.status(200).json({ success: true, result: result.rows });
-
-    }catch(err){
-        console.error(err);
-        res.status(500).json({success: false, message: "Server Error"});
-    }finally{
-        client.release();
-    }
-
-};
-
-
-module.exports = { registerForEvent, unregisterFromEvent, getRegisteredUsers };
+module.exports = { registerForEvent, unregisterFromEvent };

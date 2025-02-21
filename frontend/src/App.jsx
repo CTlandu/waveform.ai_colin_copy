@@ -3,6 +3,8 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import LandingPage from "./Pages/LandingPage";
 import TeamPage from "./Pages/TeamPage";
+import Workshops from "./Pages/Workshops";
+import RegistrationPage from "./Pages/RegistrationPage";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/workshops" element={<Workshops />} />
+          <Route path="register" element = {<RegistrationPage />} />
           {/* Add other routes as needed */}
         </Routes>
       </main>

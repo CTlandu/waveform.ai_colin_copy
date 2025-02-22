@@ -63,13 +63,13 @@ From there, you can find links to the specific API documentation pages:
 ## Running Using Docker/Podman
 
 After installing [Docker Deskop](https://docs.docker.com/desktop/), you're able to
-run the components here in the same way as things will run on IT servers.
+run the components here in a way similar to how things will run in production.
 
 After cloning this repository run `docker compose build` to build the container
 images.
 
 Then run `docker compose up` to start the frontend, backend, and a MySQL compatible
-database.
+database. Running `docker compose down` will stop everything.
 
 The backend will automatically be configured to connect to the database.
 

@@ -1,47 +1,53 @@
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      target: build
     image: registry.code.wm.edu/waveform/waveformai/frontend:latest
-    ports:
-      - "8080:80"
+    command:
+    - npm
+    - run
+    - dev
+    volumes:
+    - ./frontend:/app
+    - /app/node_modules
+    labels:
+    - traefik.enable=true
+    - traefik.http.routers.frontend.rule=PathPrefix(`/`)
+    - traefik.http.routers.frontend.entrypoints=web
+    - traefik.http.services.frontend.loadbalancer.server.port=5173
     develop:
       watch:
-      - action: sync
-        path: ./frontend
-        target: /app
-        ignore:
-        - .git/
-        - package.json
-        - package-lock.json
       - action: rebuild
         path: package.json
   
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: develop
     image: registry.code.wm.edu/waveform/waveformai/backend:latest
-    ports:
-      - "3000:3000"
+    command:
+    - node
+    - server.js
+    volumes:
+    - ./backend:/app
+    - /app/node_modules
     environment:
       DB_HOST: db
       DB_USER: waveform_ai
       DB_PASSWORD: app_password
       DB_NAME: waveform_ai
+    labels:
+    - traefik.enable=true
+    - traefik.http.routers.backend.rule=PathPrefix(`/api`)
+    - traefik.http.routers.backend.entrypoints=web
+    - traefik.http.services.backend.loadbalancer.server.port=3000
     depends_on:
       db:
         condition: service_healthy
         restart: true
     develop:
       watch:
-      - action: sync
-        path: ./backend
-        target: /app
-        ignore:
-        - .git/
-        - package.json
-        - package-lock.json
-        - __tests__/
-        - Dockerfile
-        - .dockerignore
       - action: rebuild
         path: package.json
 
@@ -57,3 +63,17 @@ services:
       - "3306:3306"
     volumes:
       - ./db_data:/var/lib/mysql
+
+  traefik:
+    image: docker.io/library/traefik:v3.3
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entryPoints.web.address=:80
+    ports:
+      - "8080:80"
+      - "8081:8080"
+    volumes:
+      # - /run/user/1000/podman/podman.sock:/var/run/docker.sock:z
+      - /var/run/docker.sock:/var/run/docker.sock

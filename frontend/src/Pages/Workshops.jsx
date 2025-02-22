@@ -2,13 +2,18 @@ import { useState, useEffect } from "react";
 import Event from "../Components/Event";
 import EventCard from "../Components/EventCard";
 
+
 const Workshops = () => {
+    const inProduction = import.meta.env.VITE_PROD == 'true';
+    const URL = inProduction ? import.meta.env.VITE_PROD_URL : import.meta.env.VITE_DEV_URL;
+    const PORT = import.meta.env.VITE_PORT;
+
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
   
     const getEvents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/events/get");
+        const response = await fetch(`${URL}:${PORT}/api/events/get`);
         const data = await response.json();
         console.log("Data", data.result);
         setEvents(data.result);

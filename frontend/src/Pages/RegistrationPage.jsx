@@ -3,6 +3,10 @@ import { useLocation } from 'react-router-dom';
 //import { get } from '../../../backend/routes/registrationRoutes';
 
 const RegistrationPage = () => {
+    const inProduction = import.meta.env.VITE_PROD == 'true';
+    const URL = inProduction ? import.meta.env.VITE_PROD_URL : import.meta.env.VITE_DEV_URL;
+    const PORT = import.meta.env.VITE_PORT;
+    
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     
@@ -20,7 +24,7 @@ const RegistrationPage = () => {
     useEffect(() => {
         const getEventDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/events/${eventId}/get`);
+                const response = await fetch(`${URL}:${PORT}/api/events/${eventId}/get`);
                 const data = await response.json();
                 
                 if (data.result) {
@@ -39,7 +43,7 @@ const RegistrationPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/api/registration/${eventId}/register`, {
+            const response = await fetch(`${URL}:${PORT}/api/registration/${eventId}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, phone, event: selectedEvent }),

@@ -1,5 +1,5 @@
-// eventsController using postgresql
-const pool = require("../config/db");
+// eventsController
+const { db } = require("../config/db");
 
 //post <backend-server>/api/events/create
 const createEvent = async (req, res) => {
@@ -37,18 +37,16 @@ const createEvent = async (req, res) => {
 
 //get <backend-server>/api/events/get
 const getAllEvents = async (req, res) => {
-    const client = await pool.connect();
     try{
         //find all events
-        const events = await client.query("SELECT * FROM events");
+        const [events] = await db.query("SELECT * FROM events");
+        console.log(events)
 
         //Send the response
-        res.status(200).json({success: true, result: events.rows});
+        res.status(200).json({success: true, result: events});
     }catch(err){
         console.error(err);
         res.status(500).json({success: false, message: "Server Error"});
-    } finally {
-        client.release();
     }
 }
 
@@ -115,7 +113,6 @@ const editEvent = async (req, res) => {
 
 //get <backend-server>/api/events/:id/get
 const getEventById = async (req, res) => {
-    const client = await pool.connect();
     try {
         const { id } = req.params;
 
@@ -123,19 +120,19 @@ const getEventById = async (req, res) => {
             return res.status(400).json({ success: false, message: "Event ID is required." });
         }
 
-        const event = await client.query('SELECT * FROM events WHERE id = $1', [id]);
-        if (event.rows.length === 0) {
+        // Use the correct query syntax for mysql2 with promises
+        const [event] = await db.query('SELECT * FROM events WHERE id = ?', [id]);
+
+        if (event.length === 0) {
             return res.status(404).json({ success: false, message: "Event not found." });
         }
 
-        res.status(200).json({ success: true, result: event.rows[0] });
+        res.status(200).json({ success: true, result: event[0] });
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: "Server Error" });
-    } finally {
-        client.release();
     }
-
 }
+
 
 module.exports = {createEvent, getAllEvents, deleteEvent, getEventById}; // Export the functions

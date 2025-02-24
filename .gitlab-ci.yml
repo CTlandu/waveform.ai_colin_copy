@@ -1,0 +1,126 @@
+---
+variables:
+  TRIVY_DISABLE_VEX_NOTICE: "true"
+
+stages:
+  - test
+  - build
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+trivy_security_scan:
+  stage: test
+  variables:
+    GIT_SUBMODULE_STRATEGY: none
+    TRIVY_CACHE_DIR: ".trivycache/"
+    TRIVY_USERNAME: "$CI_REGISTRY_USER"
+    TRIVY_PASSWORD: "$CI_REGISTRY_PASSWORD"
+  cache:
+    paths:
+      - .trivycache/
+  image:
+    name: registry.code.wm.edu/it/shared-ci/trivy:latest
+    entrypoint: [""]
+  before_script:
+    - trivy --version
+    - trivy image --download-db-only --db-repository registry.code.wm.edu/it/shared-ci/trivy-db:2
+  script:
+    - mkdir -p sboms/
+    - trivy --version
+    - trivy repo . --exit-code 0 --no-progress
+    - trivy repo . --scanners vuln --format cyclonedx --output sboms/sbom.json
+    - trivy repo . --exit-code 1 --severity CRITICAL --no-progress
+    - echo "Critical vulnerabilities cause this step to fail and need to be fixed to successfully deploy."
+  artifacts:
+    paths:
+      - sboms/sbom.json
+    expire_in: 1 week
+
+build_frontend_head:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_FORCE_HTTPS: "true"
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    # - changes:
+    #     - frontend/**
+  script:
+    - cd frontend
+    - export BUILD_TIME=$(date +%s)
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${PWD}"
+      --dockerfile "Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/frontend:latest-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}-${BUILD_TIME}"
+
+build_backend_head:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_FORCE_HTTPS: "true"
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    # - changes:
+    #     - backend/**
+  script:
+    - cd backend
+    - export BUILD_TIME=$(date +%s)
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${PWD}"
+      --dockerfile "Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/backend:latest-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}-${BUILD_TIME}"
+
+build_backend_release:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_FORCE_HTTPS: "true"
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - cd backend
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${PWD}"
+      --dockerfile "Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_TAG}
+
+build_frontend_release:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_FORCE_HTTPS: "true"
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - cd frontend
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${PWD}"
+      --dockerfile "Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_TAG}

@@ -1,3 +1,21 @@
+FROM docker.io/library/node:22 AS develop
+
+ENV TIMEZONE="America/New_York"
+
+RUN echo $TIMEZONE > /etc/timezone \
+    && cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
+    && adduser --system --group --home /app app
+
+USER app
+
+COPY --chown=app:app . /app
+
+WORKDIR /app
+
+RUN npm install
+
+CMD [ "node", "server.js" ]
+
 # Build the image with the base image of Node v22 (pulled from hub.docker.com)
 FROM docker.io/library/node:22
 

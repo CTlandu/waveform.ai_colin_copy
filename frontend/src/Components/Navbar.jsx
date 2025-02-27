@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import wmLogo from "../assets/wm-logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -125,18 +124,25 @@ const Navbar = () => {
       >
         <div className="px-6 py-4 space-y-4 border-t border-primary-50/10">
           <Link
-            to="/vision"
+            to="/premiere"
             className="block text-white hover:text-primary-50 transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
-            Vision
+            Premiere
           </Link>
           <Link
-            to="/technology"
+            to="/workshops"
             className="block text-white hover:text-primary-50 transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
-            Our Technology
+            Workshops
+          </Link>
+          <Link
+            to="/tour"
+            className="block text-white hover:text-primary-50 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Tour
           </Link>
           <Link
             to="/team"
@@ -144,6 +150,13 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Our Team
+          </Link>
+          <Link
+            to="/contact"
+            className="block text-white hover:text-primary-50 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact
           </Link>
         </div>
       </div>

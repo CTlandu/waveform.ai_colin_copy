@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import LandingPage from "./Pages/LandingPage";
@@ -15,8 +15,9 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/workshops" element={<Workshops />} />
-          <Route path="register" element = {<RegistrationPage />} />
-          {/* Add other routes as needed */}
+          <Route path="/register" element={<RegistrationPage />} />
+          {/* Add catch-all route */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />

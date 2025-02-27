@@ -5,6 +5,7 @@ import LandingPage from "./Pages/LandingPage";
 import TeamPage from "./Pages/TeamPage";
 import Workshops from "./Pages/Workshops";
 import RegistrationPage from "./Pages/RegistrationPage";
+import PremierePage from "./Pages/PremierePage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/premiere" element={<PremierePage />} />
           {/* Add catch-all route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

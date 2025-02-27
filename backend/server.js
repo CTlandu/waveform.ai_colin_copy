@@ -47,6 +47,14 @@ app.use("/api-docs/registration", swaggerIo.serve, (req, res, next) => {
   swaggerIo.setup(registrationApiSpecs)(req, res, next);
 });
 
+
+const ping = async (req, res) =>{
+  return res.status(200).json({message: "Backend Ping with status code 200"});
+}
+
+//Backend ping at /api/ping
+app.get("/api/ping", ping);
+
 // Define the routes
 const userRoutes = require("./routes/userRoutes"); // User routes
 app.use("/api/users", userRoutes);

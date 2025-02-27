@@ -23,3 +23,5 @@ node_modules/
 
 db_data/**
 sbom.json
+
+push-all.bat

@@ -13,10 +13,10 @@ const Workshops = () => {
   
     const getEvents = async () => {
       try {
-        const response = await fetch(`${URL}:${PORT}/api/events/get`);
+        const response = await fetch(`/events/get`);
         const data = await response.json();
-        console.log("Data", data.result);
         setEvents(data.result);
+        
       } catch (err) {
         console.error(err);
       }

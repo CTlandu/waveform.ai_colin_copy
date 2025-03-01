@@ -37,18 +37,33 @@ const createEvent = async (req, res) => {
 
 //get <backend-server>/api/events/get
 const getAllEvents = async (req, res) => {
-    try{
-        //find all events
+    try {
+        // Log to confirm database pool creation
+        console.log("Querying the database...");
+        
+        // Attempt to find all events
         const [events] = await db.query("SELECT * FROM events");
-        console.log(events)
 
-        //Send the response
-        res.status(200).json({success: true, result: events});
-    }catch(err){
-        console.error(err);
-        res.status(500).json({success: false, message: "Server Error"});
+        // Send the successful response
+        res.status(200).json({ success: true, result: events });
+    } catch (err) {
+        // Log the error details
+        console.error("Error occurred:", err);
+        
+        // Check if it's a connection-related issue
+        if (err.code === 'ECONNREFUSED') {
+            res.status(500).json({ success: false, message: "Database connection refused. Please check the connection settings." });
+        } else if (err.code === 'ER_ACCESS_DENIED_ERROR') {
+            res.status(500).json({ success: false, message: "Database access denied. Check your credentials." });
+        } else if (err.code === 'ER_BAD_DB_ERROR') {
+            res.status(500).json({ success: false, message: "Database not found. Ensure the database exists." });
+        } else {
+            // General error handling for other cases
+            res.status(500).json({ success: false, message: "Server error. Please try again later." });
+        }
     }
-}
+};
+
 
 //delete <backend-server>/api/events/:id/delete
 const deleteEvent = async (req, res) => {

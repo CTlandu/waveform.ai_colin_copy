@@ -24,7 +24,7 @@ const RegistrationPage = () => {
     useEffect(() => {
         const getEventDetails = async () => {
             try {
-                const response = await fetch(`/events/${eventId}/get`);
+                const response = await fetch(`/api/events/${eventId}/get`);
                 const data = await response.json();
                 
                 if (data.result) {
@@ -43,7 +43,7 @@ const RegistrationPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`/registration/${eventId}/register`, {
+            const response = await fetch(`/api/registration/${eventId}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, phone, event: selectedEvent }),

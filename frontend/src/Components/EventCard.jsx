@@ -1,5 +1,27 @@
 import { Link } from "react-router-dom";
 
+function formatDate (isoDate) {
+  const date = new Date(isoDate)
+
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+}
+
+function formatTime(timeString) {
+  // Split by colon and take first two parts
+  const [hours, minutes] = timeString.split(':');
+  
+  // Remove leading zero from hours if present
+  const formattedHours = hours.startsWith('0') ? hours.substring(1) : hours;
+  
+  return `${formattedHours}:${minutes}`;
+}
+
+
 const EventCard = ({ event, onClose }) => {
     return (
       <div
@@ -25,7 +47,7 @@ const EventCard = ({ event, onClose }) => {
             className="h-36 object-cover rounded-md"
           />
           <h2 className="text-xl font-bold text-cyan-900 mt-3">{event.title}</h2>
-          <p className="text-sm text-gray-700 mt-2">{event.date}</p>
+          <p className="text-sm text-gray-700 mt-2">{formatDate(event.date)} - {formatTime(event.time)}</p>
           <p className="text-md text-gray-800 mt-2">{event.description}</p>
   
           {/* External Link */}

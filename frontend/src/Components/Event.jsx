@@ -9,7 +9,7 @@ const Event = ({ event, onClick }) => {
           alt={event.title}
           className="w-full h-40 object-contain rounded-md"
         />
-        <h3 className="border-t-4 border-teal-600  text-lg font-semibold text-cyan-900 mt-2">{event.title}</h3>
+        <h3 className="border-t-4 border-teal-600 text-lg font-semibold text-cyan-900 mt-2">{event.title}</h3>
       </div>
     );
   };

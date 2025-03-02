@@ -52,7 +52,7 @@ const EventCard = ({ event, onClose }) => {
   
           {/* External Link */}
           <Link to={`/register?id=${event.id}`} className="mt-4 inline-block bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 transition">
-            Register for Event
+            Register for Workshop
           </Link>
           
         </div>

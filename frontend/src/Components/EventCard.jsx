@@ -44,7 +44,7 @@ const EventCard = ({ event, onClose }) => {
           <img
             src={event.image || "https://via.placeholder.com/400"}
             alt={event.title}
-            className="h-36 object-cover rounded-md"
+            className="h-36 object-contain rounded-md"
           />
           <h2 className="text-xl font-bold text-cyan-900 mt-3">{event.title}</h2>
           <p className="text-sm text-gray-700 mt-2">{formatDate(event.date)} - {formatTime(event.time)}</p>

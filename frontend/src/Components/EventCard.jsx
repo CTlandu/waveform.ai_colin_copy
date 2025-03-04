@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 
-function formatDate(isoDate) {
-  // Create a date object, explicitly parsing as UTC
-  const date = new Date(Date.parse(isoDate));
+function formatDate (isoDate) {
+  console.log("Original Date", isoDate);
+
+  const date = new Date(isoDate)
   
-  // Use UTC methods to ensure consistent interpretation
-  return new Intl.DateTimeFormat('en-US', {
+  console.log('Date object:', date);
+  console.log('UTC Date:', date.toUTCString());
+  console.log('Local Date:', date.toLocaleDateString());
+
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-    timeZone: 'America/New_York'
-  }).format(date);
+    day: 'numeric'
+  });
+
 }
 
 function formatTime(timeString) {

@@ -9,6 +9,7 @@ import grettaAnderson from "../assets/folks/Gretta.jpg";
 import finnurCricco from "../assets/folks/Finnur.jpg";
 import alanGonzalez from "../assets/folks/Alan.jpg";
 import colintang from "../assets/folks/Colin.jpg";
+import caitlin from "../assets/folks/Caitlin.png";
 
 export const teamMembers = [
   {
@@ -131,5 +132,14 @@ export const teamMembers = [
     email: "jizhoutang@outlook.com",
     website: "https://ctlandu.github.io",
     linkedin: "https://www.linkedin.com/in/colin-tang-983771180/",
+  },
+  {
+    id: 12,
+    name: "Caitlin Devenie",
+    role: "Design Support",
+    image: caitlin,
+    description:
+      "Caitlin Devenie is a sophomore physics student with experience in digital art, graphic design, and 3D modeling.",
+    email: "cmdevenie@wm.edu",
   },
 ];

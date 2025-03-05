@@ -3,15 +3,17 @@ import FloatingBubbles from "../Components/FloatingBubbles";
 import { teamMembers } from "../data/teamMembers";
 import CoreMembers from "../Components/CoreMembers";
 import WebsiteDevelopers from "../Components/WebsiteDevelopers";
+import SpecialThanks from "../Components/SpecialThanks";
 import { FaEnvelope, FaGlobe, FaLinkedin } from "react-icons/fa";
 
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Separate core team and web developers
-  const coreTeamMembers = teamMembers.slice(0, -2);
-  const webDevs = teamMembers.slice(-2);
+  // Split team members into different sections
+  const coreTeamMembers = teamMembers.slice(0, -3);
+  const webDevs = teamMembers.slice(-3, -1);
+  const specialThanks = teamMembers.slice(-1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,6 +38,12 @@ const TeamPage = () => {
       {/* Web Developers Section */}
       <WebsiteDevelopers
         members={webDevs}
+        windowWidth={windowWidth}
+        onMemberClick={setSelectedMember}
+      />
+      {/* Special Thanks Section */}
+      <SpecialThanks
+        members={specialThanks}
         windowWidth={windowWidth}
         onMemberClick={setSelectedMember}
       />

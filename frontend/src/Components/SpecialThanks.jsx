@@ -18,7 +18,7 @@ const SpecialThanks = ({ members, windowWidth, onMemberClick }) => {
   }, [windowWidth, members]);
 
   return (
-    <div className="relative w-full h-[250px] mx-auto max-w-6xl px-4 md:px-6 mt-24 sm:mt-20 md:mt-16">
+    <div className="relative w-full h-[250px] mx-auto max-w-6xl px-4 md:px-6 mt-12 sm:mt-10 md:mt-10">
       <h3 className="text-center text-white text-xl font-semibold mb-6 sm:mb-1 md:mb-6">
         Special Thanks
       </h3>

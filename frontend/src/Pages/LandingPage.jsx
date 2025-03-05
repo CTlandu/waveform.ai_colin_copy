@@ -20,8 +20,8 @@ const LandingPage = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               Welcome to Waveform.ai
             </h1>
-            <p className="text-xl text-primary-90/80 mb-12 max-w-2xl mx-auto">
-              Revolutionizing audio processing with artificial intelligence
+            <p className="text-3xl text-primary-90/80 mb-12 max-w-2xl mx-auto">
+              🎵Music, Sound, with AI💻
             </p>
 
             {/* Navigation Buttons */}

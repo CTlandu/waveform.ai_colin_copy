@@ -33,7 +33,7 @@ const Workshops = () => {
         <p className="text-lg text-cyan-900/80 mb-6">Check out our upcoming workshops!</p>
     
         {/* Grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {events && events.length > 0 ? (
             events.map((event) => (
               <Event key={event.id} event={event} onClick={() => setSelectedEvent(event)} />

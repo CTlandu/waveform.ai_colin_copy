@@ -4,12 +4,13 @@ function formatDate (isoDate) {
   console.log("Original Date", isoDate);
 
   const date = new Date(isoDate)
-  
+
   console.log('Date object:', date);
   console.log('UTC Date:', date.toUTCString());
   console.log('Local Date:', date.toLocaleDateString());
 
   return date.toLocaleDateString('en-US', {
+    weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric'

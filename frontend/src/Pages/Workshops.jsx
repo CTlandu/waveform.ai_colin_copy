@@ -15,6 +15,7 @@ const Workshops = () => {
       try {
         const response = await fetch(`/api/events/get`);
         const data = await response.json();
+        console.log(data.result)
         setEvents(data.result);
         
       } catch (err) {
@@ -33,7 +34,7 @@ const Workshops = () => {
         <p className="text-lg text-cyan-900/80 mb-6">Check out our upcoming workshops!</p>
     
         {/* Grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 pl-4 pr-4">
           {events && events.length > 0 ? (
             events.map((event) => (
               <Event key={event.id} event={event} onClick={() => setSelectedEvent(event)} />

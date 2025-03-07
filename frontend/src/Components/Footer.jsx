@@ -42,7 +42,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
             >
-              Physics Department
+              Department of Physics
             </a>
             <span>×</span>
             <a
@@ -51,7 +51,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
             >
-              Music Department
+              Department of Music
             </a>
           </div>
         </div>
@@ -59,7 +59,7 @@ const Footer = () => {
         {/* Project Information */}
         <div className="space-y-2 text-white/70">
           <div>
-            A project for{" "}
+            The inaugural project for{" "}
             <a
               href="https://www.wm.edu/offices/facultyaffairs/careers/awards-opportunities/art-science-exchange/"
               target="_blank"

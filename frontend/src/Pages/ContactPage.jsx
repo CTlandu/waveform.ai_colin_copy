@@ -102,11 +102,11 @@ const ContactPage = () => {
 
       {/* Additional Contact Info */}
       <section className="py-8 px-6">
-        <div className="max-w-3xl mx-auto bg-primary-50/20 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
-          <h3 className="text-xl font-bold text-white mb-4">
+        <div className="max-w-5xl mx-auto bg-primary-50/20 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
+          <h3 className="text-3xl font-bold text-white mb-4">
             Join Our Project
           </h3>
-          <p className="text-white/80">
+          <p className="text-white/80 text-xl">
             Waveform.AI is an innovative project combining music, sound, and
             artificial intelligence. We look forward to collaborating and
             connecting with you!

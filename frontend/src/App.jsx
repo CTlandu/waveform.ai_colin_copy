@@ -7,6 +7,7 @@ import Workshops from "./Pages/Workshops";
 import RegistrationPage from "./Pages/RegistrationPage";
 import PremierePage from "./Pages/PremierePage";
 import TourPage from "./Pages/TourPage";
+import ContactPage from "./Pages/ContactPage";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/premiere" element={<PremierePage />} />
           <Route path="/tour" element={<TourPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
           {/* Add catch-all route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -28,8 +28,10 @@ const Workshops = () => {
 
   // Helper function to format the date (YYYY-MM-DD format)
   const formatDate = (isoDate) => {
-    return new Date(isoDate).toISOString().split("T")[0];
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("en-us"); // "YYYY-MM-DD" format in local time
   };
+  
 
   // Group events by date
   const groupedEvents = events.reduce((acc, event) => {

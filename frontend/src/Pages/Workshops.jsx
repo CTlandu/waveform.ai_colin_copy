@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Event from "../Components/Event";
+import FloatingBubbles from "../Components/FloatingBubbles";
 import EventCard from "../Components/EventCard";
 
 const Workshops = () => {
@@ -47,7 +48,9 @@ const Workshops = () => {
   );
 
   return (
+    
     <div className="container mx-auto px-4 py-8">
+      <FloatingBubbles />
       <h2 className="text-3xl font-semibold text-cyan-900 mb-4">Workshops</h2>
       <p className="text-lg text-cyan-900/80 mb-6">
         Check out our upcoming workshops!
@@ -57,7 +60,7 @@ const Workshops = () => {
         sortedDates.map((date) => (
           <div key={date} className="mb-6">
             {/* Date Header */}
-            <h3 className="text-2xl font-bold text-teal-800 mb-2">
+            <h3 className="text-2xl font-bold text-teal-800 mb-2 mt-16">
               {new Date(date).toLocaleDateString("en-US", {
                 weekday: "long",
                 year: "numeric",

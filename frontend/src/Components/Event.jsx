@@ -32,37 +32,36 @@ const Event = ({ event, onClick }) => {
     >
       {/* Date and Title Section */}
       <div className="flex items-center p-4 border-b border-gray-200 bg-teal-50">
-        <div className="bg-teal-800 text-white rounded-lg px-4 py-2 text-center">
+        <div className="bg-primary-30 text-white rounded-lg px-4 py-2 text-center">
           <p className="text-lg font-bold">{formattedDate.month} {formattedDate.day}</p>
           <p className="text-sm">{formatTime(event.time)}</p>
         </div>
         <div className="ml-4 flex-1">
-          <h1 className="text-xl font-bold text-teal-500">{event.title}</h1>
+          <h1 className="text-xl font-bold text-primary-50">{event.title}</h1>
           <p className="text-sm text-gray-600">Facilitated by: {event.facilitators}</p>
         </div>
         <img 
           src={event.image || "https://via.placeholder.com/150"} 
           alt={event.title} 
-          className="w-20 h-20 object-contain rounded-md"
+          className="w-20 h-20 object-contain rounded-md hidden md:block"
         />
       </div>
 
-      {/* Event Details Section */}
-      <div className="p-4">
-        <p className="text-gray-700"><strong>Location:</strong> {event.location}</p>
-      </div>
-
       {/* Footer Section with Buttons */}
-      <div className="flex justify-end items-center px-4 py-3 bg-gray-100 border-t border-gray-300">
-        <button className="p-2 hover:bg-gray-200 rounded-full">
-          <img src={info} alt="Info" className="w-6 h-6" />
-        </button>
-        <Link 
-          to={`/register?id=${event.id}`} 
-          className="bg-teal-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-teal-700 transition"
-        >
-          Register for Workshop
-        </Link>
+      <div className="flex justify-between items-center px-4 py-3 bg-gray-100 border-t border-gray-300">
+      <p className="text-gray-700"><strong>Location:</strong> {event.location}</p>
+      <div className="flex justify-end">
+      <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-200 rounded-full">
+        <img src={info} alt="Info" className="w-6 h-6" />
+      </button>
+
+          <Link 
+            to={`/register?id=${event.id}`} 
+            className="bg-primary-60 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-teal-700 transition"
+          >
+            Register for Workshop
+          </Link>
+        </div>
       </div>
     </div>
   );

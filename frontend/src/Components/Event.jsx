@@ -11,6 +11,16 @@ function formatDate(isoDate) {
     time: date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
   };
 }
+function formatTime(time) {
+  // Ensure time is a string (just in case it's stored as an object)
+  if (!time) return "";
+
+  const [hours, minutes, seconds] = time.split(":").map(Number);
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 || 12; // Convert 0 to 12 for AM times
+  return `${formattedHours}:${String(minutes).padStart(2, "0")} ${ampm}`;
+}
+
 
 const Event = ({ event, onClick }) => {
   const formattedDate = formatDate(event.date);
@@ -22,12 +32,12 @@ const Event = ({ event, onClick }) => {
     >
       {/* Date and Title Section */}
       <div className="flex items-center p-4 border-b border-gray-200 bg-teal-50">
-        <div className="bg-teal-600 text-white rounded-lg px-4 py-2 text-center">
+        <div className="bg-teal-800 text-white rounded-lg px-4 py-2 text-center">
           <p className="text-lg font-bold">{formattedDate.month} {formattedDate.day}</p>
-          <p className="text-sm">{event.time}</p>
+          <p className="text-sm">{formatTime(event.time)}</p>
         </div>
         <div className="ml-4 flex-1">
-          <h1 className="text-xl font-bold text-teal-800">{event.title}</h1>
+          <h1 className="text-xl font-bold text-teal-500">{event.title}</h1>
           <p className="text-sm text-gray-600">Facilitated by: {event.facilitators}</p>
         </div>
         <img 
@@ -43,7 +53,7 @@ const Event = ({ event, onClick }) => {
       </div>
 
       {/* Footer Section with Buttons */}
-      <div className="flex justify-between items-center px-4 py-3 bg-gray-100 border-t border-gray-300">
+      <div className="flex justify-end items-center px-4 py-3 bg-gray-100 border-t border-gray-300">
         <button className="p-2 hover:bg-gray-200 rounded-full">
           <img src={info} alt="Info" className="w-6 h-6" />
         </button>

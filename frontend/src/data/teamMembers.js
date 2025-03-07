@@ -136,7 +136,7 @@ export const teamMembers = [
   {
     id: 12,
     name: "Caitlin Devenie",
-    role: "Design Support",
+    role: "Digital Artist",
     image: caitlin,
     description:
       "Caitlin Devenie is a sophomore physics student with experience in digital art, graphic design, and 3D modeling.",

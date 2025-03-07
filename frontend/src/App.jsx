@@ -6,6 +6,7 @@ import TeamPage from "./Pages/TeamPage";
 import Workshops from "./Pages/Workshops";
 import RegistrationPage from "./Pages/RegistrationPage";
 import PremierePage from "./Pages/PremierePage";
+import TourPage from "./Pages/TourPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/premiere" element={<PremierePage />} />
+          <Route path="/tour" element={<TourPage />} />
           {/* Add catch-all route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

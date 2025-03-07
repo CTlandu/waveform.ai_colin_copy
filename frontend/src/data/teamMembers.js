@@ -65,7 +65,7 @@ export const teamMembers = [
       "Connor Martin is a senior EPAD student focused on vintage electronics, computer systems and musical interfaces.",
     email: "cemartin02@wm.edu",
     website: "https://majorcadencetech.org",
-    // linkedin: "https://linkedin.com/in/connor-martin",
+    linkedin: "https://www.linkedin.com/in/connor-martin-700610301/",
   },
   {
     id: 6,
@@ -74,9 +74,9 @@ export const teamMembers = [
     image: michaelCampagna,
     description:
       "Michael Campagna is a junior math and physics student exploring AI in sound design.",
-    // email: "michael.campagna@example.com",
-    // website: "https://example.com",
-    // linkedin: "https://linkedin.com/in/michael-campagna",
+    email: "macampagna@wm.edu",
+    website: "michael-campagna.github.io",
+    linkedin: "https://www.linkedin.com/in/michael-campagna-8a10a4294/",
   },
   {
     id: 7,

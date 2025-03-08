@@ -64,11 +64,12 @@ const RegistrationPage = () => {
             {!submitted && (
                         <>           
                 <h2 className="text-2xl font-semibold text-cyan-900 mb-4 text-center">Register for</h2>
-                <h3 className="text-lg text-cyan-900/80 mb-6 text-center">{eventName}</h3>    
+                <h3 className="text-lg text-cyan-900/80 mb-6 text-center">{eventName}</h3>   
+                <h6 className='pb-8 text-red-500'><span className="text-red-500">*</span> inidicates required field</h6> 
                 <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
 
                     <div className="flex flex-col">
-                        <label className="font-medium">Full Name:</label>
+                        <label className="font-medium">Full Name: <span className="text-red-500">*</span> </label>
                         <input
                             type="text"
                             placeholder="Enter your name"
@@ -81,18 +82,23 @@ const RegistrationPage = () => {
 
                     <div className="flex flex-col">
                         <label className="font-medium">Title:</label>
-                        <select value={title} onChange={(e) => setTitle(e.target.value)} className='border-2'>
+                        <select 
+                            value={title} 
+                            onChange={(e) => setTitle(e.target.value)} 
+                            className={`border rounded p-2 mt-1 ${title ? "text-black" : "text-gray-400"}`}
+                        >
                             <option value="">Choose a Title</option>
-                            <option value="Ms.">Ms.</option>
-                            <option value="Mrs.">Mrs.</option>
-                            <option value="Mr.">Mr.</option>
-                            <option value="Dr.">Dr.</option>
-                            <option value="Prof.">Prof.</option>
+                            <option value="Ms." className='text-black'>Ms.</option>
+                            <option value="Mrs." className='text-black'>Mrs.</option>
+                            <option value="Mr." className='text-black'>Mr.</option>
+                            <option value="Dr." className='text-black'>Dr.</option>
+                            <option value="Prof." className='text-black'>Prof.</option>
                         </select>
                     </div>
 
+
                     <div className="flex flex-col">
-                        <label className="font-medium">Email:</label>
+                        <label className="font-medium">Email: <span className="text-red-500">*</span></label>
                         <input
                             type="email"
                             placeholder="Enter your email"
@@ -116,14 +122,19 @@ const RegistrationPage = () => {
 
                     <div className="flex flex-col">
                         <label className="font-medium">Affiliation to William & Mary:</label>
-                        <select value={affiliation} onChange={(e) => setAffiliation(e.target.value)} className='border-2'>
+                        <select 
+                            value={affiliation} 
+                            onChange={(e) => setAffiliation(e.target.value)} 
+                            className={`border rounded p-2 mt-1 ${affiliation ? "text-black" : "text-gray-400"}`}
+                        >
                             <option value="">Choose affiliation</option>
-                            <option value="Student">Student</option>
-                            <option value="Professor">Professor</option>
-                            <option value="Staff">Staff</option>
-                            <option value="Community Member">Community Member</option>
+                            <option value="Student" className='text-black'>Student</option>
+                            <option value="Professor" className='text-black'>Alumni</option>
+                            <option value="Staff" className='text-black'>Staff</option>
+                            <option value="Community Member" className='text-black'>Community Member</option>
                         </select>
                     </div>
+
 
                     <button 
                         type="submit" 

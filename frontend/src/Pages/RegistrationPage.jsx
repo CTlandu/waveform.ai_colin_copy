@@ -13,8 +13,10 @@ const RegistrationPage = () => {
     const eventId = query.get("id");
 
     const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [affiliation, setAffiliation] = useState("")
     const [selectedEvent, setSelectedEvent] = useState("");
     const [link, setLink] = useState("");
     const [eventName, setEventName] = useState("");
@@ -46,7 +48,7 @@ const RegistrationPage = () => {
             const response = await fetch(`/api/registration/${eventId}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, phone, event: selectedEvent }),
+                body: JSON.stringify({ name, email, phone, title, affiliation, event: selectedEvent }),
             });
             if (response.ok) setSubmitted(true);
         } catch (err) {
@@ -66,14 +68,27 @@ const RegistrationPage = () => {
                 <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
 
                     <div className="flex flex-col">
-                        <label className="font-medium">Name:</label>
+                        <label className="font-medium">Full Name:</label>
                         <input
                             type="text"
                             placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="border rounded p-2 mt-1"
+                            required
                         />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label className="font-medium">Title:</label>
+                        <select value={title} onChange={(e) => setTitle(e.target.value)} className='border-2'>
+                            <option value="">Choose a Title</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Dr.">Dr.</option>
+                            <option value="Prof.">Prof.</option>
+                        </select>
                     </div>
 
                     <div className="flex flex-col">
@@ -84,6 +99,7 @@ const RegistrationPage = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="border rounded p-2 mt-1"
+                            required
                         />
                     </div>
 
@@ -96,6 +112,17 @@ const RegistrationPage = () => {
                             onChange={(e) => setPhone(e.target.value)}
                             className="border rounded p-2 mt-1"
                         />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label className="font-medium">Affiliation to William & Mary:</label>
+                        <select value={affiliation} onChange={(e) => setAffiliation(e.target.value)} className='border-2'>
+                            <option value="">Choose affiliation</option>
+                            <option value="Student">Student</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Staff">Staff</option>
+                            <option value="Community Member">Community Member</option>
+                        </select>
                     </div>
 
                     <button 

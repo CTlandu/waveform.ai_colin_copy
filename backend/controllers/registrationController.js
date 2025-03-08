@@ -3,14 +3,15 @@ const { db } = require('../config/db');
 const registerForEvent = async (req, res) => {
     try {
         const event_id = req.params.eventId;
-        const { name, email, phone } = req.body;
+        const { name, email, phone, title, affiliation } = req.body;
+        console.log("Received Data:", { name, email, phone, title, affiliation }); // Debugging
 
         if (!event_id) return res.status(400).json({ success: false, message: "Event ID not provided" });
-        if (!name || !email || !phone) return res.status(400).json({ success: false, message: "Missing required fields" });
+        if (!name || !email ) return res.status(400).json({ success: false, message: "Missing required fields" });
 
         const [result] = await db.query(
-            'INSERT INTO registrations (event_id, name, email, phone) VALUES (?, ?, ?, ?)',
-            [event_id, name, email, phone]
+            'INSERT INTO registrations (event_id, name, email, phone, title, affiliation) VALUES (?, ?, ?, ?, ?, ?)',
+            [event_id, name, email, phone, title, affiliation]
           );
 
         res.status(200).json({ success: true, result: result, message: "Registered successfully" });

@@ -52,7 +52,7 @@ const Event = ({ event, onClick }) => {
       <p className="text-gray-700"><strong>Location:</strong> {event.location}</p>
       <div className="flex justify-end">
       <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-200 rounded-full">
-        <img src={info} alt="Info" className="w-6 h-6" />
+        <img src={info} alt="Info" className="w-6 h-6 invisible md:visible" />
       </button>
 
           <Link 

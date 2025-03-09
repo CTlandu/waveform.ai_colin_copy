@@ -18,7 +18,7 @@ const LandingPage = () => {
             <h1 className="text-4xl md:text-4xl font-bold text-white mb-6">
               Waveform.ai – Where Sound Meets Motion
             </h1>
-            <p className="text-2xl text-primary-90/80 mb-12 max-w-2xl mx-auto">
+            <p className="text-2xl text-primary-90/80 max-w-2xl mx-auto">
               Your presence shapes the music, AI echoes the unseen.
             </p>
 

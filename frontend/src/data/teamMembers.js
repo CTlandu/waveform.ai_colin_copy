@@ -19,7 +19,7 @@ export const teamMembers = [
     image: ranYang,
     description:
       "Prof. Ran Yang leads production and technical development, bringing 20 years of higher education experience in physics and electrical engineering with AI applications in sound design and medical technologies.",
-    // email: "ran.yang@example.com",
+    email: "rxyan2@wm.edu",
     // website: "https://example.com",
     // linkedin: "https://linkedin.com/in/ran-yang",
   },
@@ -30,7 +30,7 @@ export const teamMembers = [
     image: benWhiting,
     description:
       "Prof. Ben Whiting serves as Music and Artistic Director, an internationally award-winning composer who explores technological innovations to enhance musical expression through his work with numerous prestigious festivals and organizations.",
-    // email: "ben.whiting@example.com",
+    email: "bdwhiting@wm.edu",
     // website: "https://example.com",
     // linkedin: "https://linkedin.com/in/ben-whiting",
   },

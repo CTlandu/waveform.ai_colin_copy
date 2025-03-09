@@ -11,7 +11,7 @@ const LandingPage = () => {
       <FloatingBubbles />
 
       {/* Hero Section */}
-      <section className="relative py-10 px-6">
+      <section className="relative py-8 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             {/* Main Title and Description */}
@@ -22,7 +22,7 @@ const LandingPage = () => {
               Your presence shapes the music, AI echoes the unseen.
             </p>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => navigate("/premiere")}
@@ -36,7 +36,7 @@ const LandingPage = () => {
               >
                 Meet the Team
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

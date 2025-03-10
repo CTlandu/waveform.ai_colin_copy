@@ -47,7 +47,6 @@ const Workshops = () => {
   );
 
   return (
-    
     <div className="container mx-auto px-4 py-8">
       <FloatingBubbles />
       <h2 className="text-3xl font-semibold text-cyan-900 mb-4">Workshops</h2>

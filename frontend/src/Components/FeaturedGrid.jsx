@@ -19,7 +19,7 @@ const FeaturedGrid = () => {
               ★
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-wider animate-pulse">
-              🎁 FREE TICKETS & GIFTS FOR ALL EVENTS!! 🎁
+              🎁 FREE Tickets & Gifts for all events!! 🎁
             </h2>
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform rotate-45"></div>
@@ -85,7 +85,7 @@ const FeaturedGrid = () => {
 
             <div className="border-t border-primary-50/30 pt-4 mt-4">
               <p className="text-white/90 text-2xl">
-                Presented by ALL Waveform.ai{" "}
+                Presented by all Waveform.ai{" "}
                 <Link
                   to="/team"
                   className="text-primary-90 hover:text-white transition-colors"
@@ -171,7 +171,7 @@ const FeaturedGrid = () => {
                 </div>
               </div>
 
-              <p className="text-primary-90 mt-2 text-sm">Free gifts!</p>
+              <p className="text-primary-90 mt-2 text-lg">Free gifts!</p>
             </div>
 
             {/* Workshop 2 */}
@@ -231,7 +231,7 @@ const FeaturedGrid = () => {
                 </div>
               </div>
 
-              <p className="text-primary-90 mt-2 text-sm">
+              <p className="text-primary-90 mt-2 text-lg">
                 Free gifts! Origami lessons and exclusive merch access!
               </p>
             </div>

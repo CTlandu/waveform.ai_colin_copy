@@ -149,15 +149,8 @@ const RegistrationPage = () => {
                     {submitted && (
                         <>
                         <p className='text-cyan-900 font-bold'>
-                            Thank you for registering! Click the button below to complete the process!
+                            Thank you for registering!
                         </p>
-                        <a className='flex justify-center items-center bg-cyan-900 text-white p-3 rounded-lg hover:bg-cyan-700 transition'
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >
-                        Finish Registration
-                        </a>
                         </>
                     )
                     

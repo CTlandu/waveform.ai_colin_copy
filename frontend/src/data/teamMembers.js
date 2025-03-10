@@ -19,7 +19,7 @@ export const teamMembers = [
     image: ranYang,
     description:
       "Prof. Ran Yang leads production and technical development, bringing 20 years of higher education experience in physics and electrical engineering with AI applications in sound design and medical technologies.",
-    // email: "ran.yang@example.com",
+    email: "rxyan2@wm.edu",
     // website: "https://example.com",
     // linkedin: "https://linkedin.com/in/ran-yang",
   },
@@ -30,7 +30,7 @@ export const teamMembers = [
     image: benWhiting,
     description:
       "Prof. Ben Whiting serves as Music and Artistic Director, an internationally award-winning composer who explores technological innovations to enhance musical expression through his work with numerous prestigious festivals and organizations.",
-    // email: "ben.whiting@example.com",
+    email: "bdwhiting@wm.edu",
     // website: "https://example.com",
     // linkedin: "https://linkedin.com/in/ben-whiting",
   },
@@ -65,7 +65,7 @@ export const teamMembers = [
       "Connor Martin is a senior EPAD student focused on vintage electronics, computer systems and musical interfaces.",
     email: "cemartin02@wm.edu",
     website: "https://majorcadencetech.org",
-    // linkedin: "https://linkedin.com/in/connor-martin",
+    linkedin: "https://www.linkedin.com/in/connor-martin-700610301/",
   },
   {
     id: 6,
@@ -74,9 +74,9 @@ export const teamMembers = [
     image: michaelCampagna,
     description:
       "Michael Campagna is a junior math and physics student exploring AI in sound design.",
-    // email: "michael.campagna@example.com",
-    // website: "https://example.com",
-    // linkedin: "https://linkedin.com/in/michael-campagna",
+    email: "macampagna@wm.edu",
+    website: "michael-campagna.github.io",
+    linkedin: "https://www.linkedin.com/in/michael-campagna-8a10a4294/",
   },
   {
     id: 7,
@@ -136,7 +136,7 @@ export const teamMembers = [
   {
     id: 12,
     name: "Caitlin Devenie",
-    role: "Design Support",
+    role: "Digital Artist",
     image: caitlin,
     description:
       "Caitlin Devenie is a sophomore physics student with experience in digital art, graphic design, and 3D modeling.",

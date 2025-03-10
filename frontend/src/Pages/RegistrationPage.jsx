@@ -13,8 +13,10 @@ const RegistrationPage = () => {
     const eventId = query.get("id");
 
     const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [affiliation, setAffiliation] = useState("")
     const [selectedEvent, setSelectedEvent] = useState("");
     const [link, setLink] = useState("");
     const [eventName, setEventName] = useState("");
@@ -46,7 +48,7 @@ const RegistrationPage = () => {
             const response = await fetch(`/api/registration/${eventId}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, phone, event: selectedEvent }),
+                body: JSON.stringify({ name, email, phone, title, affiliation, event: selectedEvent }),
             });
             if (response.ok) setSubmitted(true);
         } catch (err) {
@@ -62,28 +64,48 @@ const RegistrationPage = () => {
             {!submitted && (
                         <>           
                 <h2 className="text-2xl font-semibold text-cyan-900 mb-4 text-center">Register for</h2>
-                <h3 className="text-lg text-cyan-900/80 mb-6 text-center">{eventName}</h3>    
+                <h3 className="text-lg text-cyan-900/80 mb-6 text-center">{eventName}</h3>   
+                <h6 className='pb-8 text-red-500'><span className="text-red-500">*</span> inidicates required field</h6> 
                 <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
 
                     <div className="flex flex-col">
-                        <label className="font-medium">Name:</label>
+                        <label className="font-medium">Full Name: <span className="text-red-500">*</span> </label>
                         <input
                             type="text"
                             placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="border rounded p-2 mt-1"
+                            required
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <label className="font-medium">Email:</label>
+                        <label className="font-medium">Title:</label>
+                        <select 
+                            value={title} 
+                            onChange={(e) => setTitle(e.target.value)} 
+                            className={`border rounded p-2 mt-1 ${title ? "text-black" : "text-gray-400"}`}
+                        >
+                            <option value="">Choose a Title</option>
+                            <option value="Ms." className='text-black'>Ms.</option>
+                            <option value="Mrs." className='text-black'>Mrs.</option>
+                            <option value="Mr." className='text-black'>Mr.</option>
+                            <option value="Dr." className='text-black'>Dr.</option>
+                            <option value="Prof." className='text-black'>Prof.</option>
+                        </select>
+                    </div>
+
+
+                    <div className="flex flex-col">
+                        <label className="font-medium">Email: <span className="text-red-500">*</span></label>
                         <input
                             type="email"
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="border rounded p-2 mt-1"
+                            required
                         />
                     </div>
 
@@ -97,6 +119,22 @@ const RegistrationPage = () => {
                             className="border rounded p-2 mt-1"
                         />
                     </div>
+
+                    <div className="flex flex-col">
+                        <label className="font-medium">Affiliation to William & Mary:</label>
+                        <select 
+                            value={affiliation} 
+                            onChange={(e) => setAffiliation(e.target.value)} 
+                            className={`border rounded p-2 mt-1 ${affiliation ? "text-black" : "text-gray-400"}`}
+                        >
+                            <option value="">Choose affiliation</option>
+                            <option value="Student" className='text-black'>Student</option>
+                            <option value="Professor" className='text-black'>Alumni</option>
+                            <option value="Staff" className='text-black'>Staff</option>
+                            <option value="Community Member" className='text-black'>Community Member</option>
+                        </select>
+                    </div>
+
 
                     <button 
                         type="submit" 

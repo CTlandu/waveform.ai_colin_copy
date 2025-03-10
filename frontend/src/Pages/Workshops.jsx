@@ -26,7 +26,6 @@ const Workshops = () => {
   useEffect(() => {
     getEvents();
   }, []);
-
   // Helper function to format the date (YYYY-MM-DD format)
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);

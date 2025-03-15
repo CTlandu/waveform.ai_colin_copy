@@ -59,7 +59,7 @@ const Footer = () => {
         {/* Project Information */}
         <div className="space-y-2 text-white/70">
           <div>
-            The inaugural project for{" "}
+            An inaugural project for{" "}
             <a
               href="https://www.wm.edu/offices/facultyaffairs/careers/awards-opportunities/art-science-exchange/"
               target="_blank"

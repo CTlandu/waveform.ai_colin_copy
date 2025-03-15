@@ -10,12 +10,12 @@ const TourPage = () => {
       {/* Content Section */}
       <section className="py-16 px-6 flex-grow flex flex-col justify-center">
         <div className="max-w-4xl mx-auto bg-primary-20/30 backdrop-blur-md rounded-xl p-8 shadow-lg">
-          <p className="text-2xl md:text-3xl text-white text-center font-serif italic leading-relaxed">
-            We will be showcasing the waveform.ai project in Virginia and
+          <p className="text-2xl md:text-3xl text-white text-center leading-relaxed">
+            We will be showcasing the Waveform.ai project in Virginia and
             beyond.
             <br />
             <br />
-            <span className="text-primary-90 font-bold">
+            <span className="text-primary-90 font-bold italic">
               Stay tuned for more plans!
             </span>
           </p>

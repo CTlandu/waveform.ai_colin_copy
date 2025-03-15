@@ -30,21 +30,28 @@ const CoreMembers = ({ members, windowWidth, onMemberClick }) => {
       });
     } else {
       // W-shape layout for larger screens
-      const wPoints = isMediumScreen
-        ? [
-            { x: 15, y: 20 },
-            { x: 35, y: 45 },
-            { x: 50, y: 30 },
-            { x: 65, y: 65 },
-            { x: 85, y: 40 },
-          ]
-        : [
-            { x: 15, y: 25 },
-            { x: 30, y: 75 },
-            { x: 50, y: 25 },
-            { x: 70, y: 75 },
-            { x: 85, y: 25 },
-          ];
+      // const wPoints = isMediumScreen
+      //   ? [
+      //       { x: 15, y: 10 }, // Top point
+      //       { x: 35, y: 30 }, // Bottom point
+      //       { x: 50, y: 20 }, // Middle point
+      //       { x: 65, y: 45 }, // Bottom point
+      //       { x: 85, y: 30 }, // Top point
+      //     ]
+      //   : [
+      //       { x: 15, y: 15 }, // Top point
+      //       { x: 30, y: 75 }, // Bottom point
+      //       { x: 50, y: 15 }, // Top point
+      //       { x: 70, y: 75 }, // Bottom point
+      //       { x: 85, y: 15 }, // Top point
+      //     ];
+      const wPoints = [
+        { x: 15, y: 15 }, // Top point
+        { x: 30, y: 75 }, // Bottom point
+        { x: 50, y: 15 }, // Top point
+        { x: 70, y: 75 }, // Bottom point
+        { x: 85, y: 15 }, // Top point
+      ];
 
       return members.map((member, index) => {
         const pointIndex = Math.floor(
@@ -80,22 +87,23 @@ const CoreMembers = ({ members, windowWidth, onMemberClick }) => {
   }, [windowWidth, members]);
 
   return (
-    <div className="relative w-full h-[800px] mx-auto max-w-6xl px-4 md:px-6">
-      <h3
-        className="text-center text-white text-xl font-semibold 
-                    mt-12"
-      >
-        Core Team
-      </h3>
+    <div className="relative w-full mx-auto max-w-6xl px-4">
+      {/* Title Section */}
+      <section className="text-center pt-8">
+        <h3 className="text-white text-xl font-semibold">Core Team</h3>
+      </section>
 
-      {positions.map((member) => (
-        <MemberCard
-          key={member.id}
-          member={member}
-          windowWidth={windowWidth}
-          onClick={() => onMemberClick(member)}
-        />
-      ))}
+      {/* Members Grid Section */}
+      <section className="relative h-[820px]">
+        {positions.map((member) => (
+          <MemberCard
+            key={member.id}
+            member={member}
+            windowWidth={windowWidth}
+            onClick={() => onMemberClick(member)}
+          />
+        ))}
+      </section>
     </div>
   );
 };

@@ -9,13 +9,13 @@ const ContactPage = () => {
       <FloatingBubbles />
 
       {/* Hero Section */}
-      <section className="relative py-12 px-6">
+      <section className="relative py-6 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               Contact Us
             </h1>
-            <p className="text-xl text-primary-90/80 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-primary-90/80 mb-12 max-w-2xl mx-auto mb-0">
               Have any questions or interested in collaboration? Feel free to
               reach out to our team members
             </p>
@@ -109,7 +109,7 @@ const ContactPage = () => {
             Join Our Project
           </h3>
           <p className="text-white/80 text-xl">
-            Waveform.AI is an innovative project combining music, sound, and
+            Waveform.ai is an innovative project combining music, sound, and
             artificial intelligence. We look forward to collaborating and
             connecting with you!
           </p>

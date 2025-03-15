@@ -75,7 +75,7 @@ export const teamMembers = [
     description:
       "Michael Campagna is a junior math and physics student exploring AI in sound design.",
     email: "macampagna@wm.edu",
-    website: "michael-campagna.github.io",
+    website: "https://michael-campagna.github.io",
     linkedin: "https://www.linkedin.com/in/michael-campagna-8a10a4294/",
   },
   {

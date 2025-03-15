@@ -69,12 +69,12 @@ const FrontPanel = () => {
     {
       title: "SOUND & AI",
       content:
-        "Experience a mesmerizing performance where humans interact with two AI implementations: an AI-enhanced synthesizer and an AI improviser. The synthesizer estimates parameters from audio input, recreating sounds by automatically adjusting settings. By listening to AI's unique expressions, we discover it's more than just a cold tool - it's a rich, creative partner with its own sonic personality.",
+        "Experience a mesmerizing performance where humans interact with two AI implementations: an AI-enhanced synthesizer and an AI improviser. By listening to AI's unique expressions, we discover it's more than just a cold tool - it's a rich, creative partner with its own sonic personality.",
     },
     {
       title: "TECHNOLOGY",
       content:
-        "At our core is a synthesizer producing sound from pure waveforms. The AI directs these sonic streams like water flowing through channels. We blend analog warmth with digital precision - our AI generates digital signals that flow into analog components, creating natural distortions and warmth that purely digital systems lack. This hybrid approach creates a more organic, responsive interface for performers.",
+        "At our core is a synthesizer producing sound from pure waveforms. The AI directs these sonic streams like water flowing through channels. We blend analog warmth with digital precision. This hybrid approach creates a more organic, responsive interface for performers.",
     },
     {
       title: "AUDIENCE IMPACT",
@@ -182,18 +182,18 @@ const FrontPanel = () => {
                 <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary-90/80 flex items-center justify-center text-black font-bold text-sm shadow-inner border border-black">
                   {index + 1}
                 </div>
-                
+
                 {/* Switch button */}
                 <div
                   className={`w-8 md:w-10 h-8 md:h-10 rounded-md relative transition-all duration-200 ${
-                    switchStates[index] 
-                      ? 'bg-gradient-to-b from-primary-70 to-primary-90 shadow-lg shadow-primary-90/30 translate-y-1' 
-                      : 'bg-gradient-to-b from-gray-600 to-gray-700 translate-y-3'
+                    switchStates[index]
+                      ? "bg-gradient-to-b from-primary-70 to-primary-90 shadow-lg shadow-primary-90/30 translate-y-1"
+                      : "bg-gradient-to-b from-gray-600 to-gray-700 translate-y-3"
                   }`}
                 >
                   {/* Button highlight */}
                   <div className="absolute top-1 left-1 right-1 h-1/4 bg-white/20 rounded-t-sm"></div>
-                  
+
                   {/* Button texture */}
                   <div className="absolute top-1/3 left-1 right-1 h-1/3">
                     <div className="w-full h-1 bg-black/20 mb-1"></div>
@@ -201,7 +201,7 @@ const FrontPanel = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Switch connection */}
               <div className="w-6 h-1 bg-gray-600 mx-auto mt-1"></div>
             </div>

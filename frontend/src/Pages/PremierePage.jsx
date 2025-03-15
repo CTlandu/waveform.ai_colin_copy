@@ -16,7 +16,7 @@ const PremierePage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-3xl md:text-6xl font-bold text-white mb-6">
-              Waveform.ai Grand Premiere!
+              Waveform.ai Grand Premiere
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
               A demonstration of how music and physics work together to
@@ -29,13 +29,13 @@ const PremierePage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              RSVP tickets for free!
+              RSVP tickets for free
             </a>
           </div>
           <div className="mt-6 text-center">
             <div className="inline-block bg-primary-90/20 px-6 py-3 rounded-lg border border-primary-90/50 animate-pulse">
               <span className="text-2xl font-bold text-white">
-                Free gifts for all attendees!
+                Free gifts for all attendees
               </span>
             </div>
           </div>

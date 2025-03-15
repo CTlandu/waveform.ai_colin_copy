@@ -19,7 +19,7 @@ const FeaturedGrid = () => {
               ★
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-wider animate-pulse">
-              🎁 FREE Tickets & Gifts for all events!! 🎁
+              FREE Tickets & Gifts for all events!!
             </h2>
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform rotate-45"></div>

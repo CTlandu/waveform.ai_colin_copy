@@ -35,7 +35,7 @@ const PremierePage = () => {
           <div className="mt-6 text-center">
             <div className="inline-block bg-primary-90/20 px-6 py-3 rounded-lg border border-primary-90/50 animate-pulse">
               <span className="text-2xl font-bold text-white">
-                🎁 Free gifts for all attendees! 🎁
+                Free gifts for all attendees!
               </span>
             </div>
           </div>
@@ -48,7 +48,7 @@ const PremierePage = () => {
           {/* Event Details */}
           <div className="bg-primary-20/50 backdrop-blur-md rounded-xl p-8 shadow-lg mb-10">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">
-              Event Details
+              Premiere Showtime
             </h2>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -102,7 +102,8 @@ const PremierePage = () => {
                   </span>{" "}
                   Dr. Ran Yang and Dr. Benjamin Whiting with contributions from
                   renowned international transdisciplinary artist (MELO) Melody
-                  Chua
+                  Chua, and a team of six students who developed a novel
+                  approach to sound design.
                 </div>
               </div>
             </div>

@@ -14,18 +14,18 @@ import caitlin from "../assets/folks/Caitlin.png";
 export const teamMembers = [
   {
     id: 1,
-    name: "Ran Yang",
+    name: "Dr. Ran Yang",
     role: "Exec Producer/Lead Tech",
     image: ranYang,
     description:
       "Prof. Ran Yang leads production and technical development, bringing 20 years of higher education experience in physics and electrical engineering with AI applications in sound design and medical technologies.",
     email: "rxyan2@wm.edu",
-    // website: "https://example.com",
-    // linkedin: "https://linkedin.com/in/ran-yang",
+    website: "https://www.wm.edu/peopleofwm/creative-critical-thinkers/yang-r/",
+    linkedin: "https://www.linkedin.com/in/ranyang77/",
   },
   {
     id: 2,
-    name: "Benjamin D. Whiting",
+    name: "Dr. Benjamin D. Whiting",
     role: "Artistic Designer",
     image: benWhiting,
     description:

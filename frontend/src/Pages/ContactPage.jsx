@@ -37,7 +37,9 @@ const ContactPage = () => {
                 />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">Ran Yang</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Dr. Ran Yang
+                </h3>
                 <p className="text-primary-90/80 mb-4">
                   Exec Producer/Lead Tech
                 </p>
@@ -74,7 +76,7 @@ const ContactPage = () => {
               </div>
               <div className="text-center md:text-left">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  Benjamin D. Whiting
+                  Dr. Benjamin D. Whiting
                 </h3>
                 <p className="text-primary-90/80 mb-4">Artistic Desginer</p>
                 <div className="flex items-center justify-center md:justify-start gap-2 text-white">

@@ -137,10 +137,9 @@ const PremierePage = () => {
               </div>
 
               <p className="text-white/90 text-xl leading-relaxed">
-                Don't miss this unique experience at the intersection of art,
-                science, and technology! The performance will feature innovative
-                AI-human collaborative compositions that push the boundaries of
-                traditional music creation.
+                The performance will feature innovative AI-human collaborative
+                compositions that push the boundaries of traditional music
+                creation.
               </p>
             </div>
           </div>

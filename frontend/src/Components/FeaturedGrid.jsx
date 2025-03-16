@@ -8,7 +8,7 @@ const FeaturedGrid = () => {
     <div>
       {/* Eye-catching banner for free tickets and gifts */}
       <div className="relative mb-8 overflow-hidden">
-        <div className="bg-gradient-to-r from-primary-70 via-primary-90 to-primary-70 text-white text-center py-3 px-4 transform -rotate-1 shadow-lg">
+        {/* <div className="bg-gradient-to-r from-primary-70 via-primary-90 to-primary-70 text-white text-center py-3 px-4 transform -rotate-1 shadow-lg">
           <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary-50 rounded-full opacity-50 animate-pulse"></div>
           <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-primary-60 rounded-full opacity-50 animate-pulse"></div>
           <div className="relative">
@@ -23,7 +23,7 @@ const FeaturedGrid = () => {
             </h2>
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform rotate-45"></div>
-        </div>
+        </div> */}
         <div className="absolute -bottom-3 left-0 right-0 h-6 bg-gradient-to-r from-primary-70 via-primary-90 to-primary-70 transform rotate-1 z-[-1]"></div>
       </div>
 

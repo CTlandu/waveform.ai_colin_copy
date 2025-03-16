@@ -59,7 +59,7 @@ const FrontPanel = () => {
     }
   };
 
-  // Content for each channel (精简版)
+  // Content for each channel
   const channelContent = [
     {
       title: "WATER & WAVES",

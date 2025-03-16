@@ -6,10 +6,9 @@ const MemberCard = ({ member, windowWidth, onClick }) => {
       style={{
         left: `${member.left}%`,
         top: `${member.top}%`,
-        animation:
-          windowWidth >= 768
-            ? `float-member ${3 + member.animationDelay}s ease-in-out infinite`
-            : "none",
+        animation: `float-member ${
+          3 + member.animationDelay
+        }s ease-in-out infinite`,
       }}
     >
       <div className="group relative cursor-pointer" onClick={onClick}>

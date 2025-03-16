@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 //import { get } from '../../../backend/routes/registrationRoutes';
 
 const RegistrationPage = () => {
@@ -148,9 +148,24 @@ const RegistrationPage = () => {
 
                     {submitted && (
                         <>
-                        <p className='text-cyan-900 font-bold'>
-                            Thank you for registering!
-                        </p>
+                        <div className="text-center max-w-md mx-auto p-8 rounded-lg bg-white">
+                            <h2 className="text-cyan-900 text-2xl font-bold mb-4">Thank you for registering!</h2>
+                            <p className="text-gray-600 mb-6">Your workshop registration has been confirmed. We look forward to seeing you there!</p>
+                            
+                            <Link
+                                to={`/workshops`}
+                                className="mb-3 w-full bg-cyan-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-cyan-700 transition shadow-md block text-center"
+                            >
+                                Explore More Workshops
+                            </Link>
+                            
+                            <Link
+                                to={`/`}
+                                className="w-full text-cyan-600 py-3 rounded-lg text-lg font-medium hover:bg-gray-100 transition border border-cyan-600 block text-center"
+                            >
+                                Return Home
+                            </Link>
+                        </div>
                         </>
                     )
                     

@@ -3,9 +3,11 @@ import MemberCard from "./MemberCard";
 
 const SpecialThanks = ({ members, windowWidth, onMemberClick }) => {
   const generatePositions = (screenWidth) => {
-    return members.map((member) => ({
+    const isSmallScreen = screenWidth < 768;
+
+    return members.map((member, index) => ({
       ...member,
-      left: 50, // Center horizontally
+      left: isSmallScreen ? 30 + index * 40 : 35 + index * 30, // hoirzontal display
       top: 35,
       animationDelay: Math.random() * 2,
     }));

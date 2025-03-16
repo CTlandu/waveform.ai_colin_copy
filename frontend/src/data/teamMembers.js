@@ -10,6 +10,7 @@ import finnurCricco from "../assets/folks/Finnur.jpg";
 import alanGonzalez from "../assets/folks/Alan.jpg";
 import colintang from "../assets/folks/Colin.jpg";
 import caitlin from "../assets/folks/Caitlin.png";
+import brian from "../assets/folks/Brian.jpg";
 
 export const teamMembers = [
   {
@@ -141,5 +142,15 @@ export const teamMembers = [
     description:
       "Caitlin Devenie is a sophomore physics student with experience in digital art, graphic design, and 3D modeling.",
     email: "cmdevenie@wm.edu",
+  },
+  {
+    id: 13,
+    name: "Brian Beadle",
+    role: "Videographer",
+    image: brian,
+    description:
+      "Brian is a Photographer and Videographer who aims to showcase the beauty of Human Creativity when paired with Artificial Intelligence.",
+    email: "CasuallyMixedMedia@gmail.com",
+    linkedin: "https://www.linkedin.com/in/brian-beadle-60607a53",
   },
 ];

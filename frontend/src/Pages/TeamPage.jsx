@@ -11,9 +11,9 @@ const TeamPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Split team members into different sections
-  const coreTeamMembers = teamMembers.slice(0, -3);
-  const webDevs = teamMembers.slice(-3, -1);
-  const specialThanks = teamMembers.slice(-1);
+  const coreTeamMembers = teamMembers.slice(0, -4);
+  const webDevs = teamMembers.slice(-4, -2);
+  const specialThanks = teamMembers.slice(-2);
 
   useEffect(() => {
     const handleResize = () => {

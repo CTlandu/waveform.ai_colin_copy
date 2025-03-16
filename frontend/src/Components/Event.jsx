@@ -48,16 +48,12 @@ const Event = ({ event, onClick }) => {
       </div>
 
       {/* Footer Section with Buttons */}
-      <div className="flex justify-between items-center px-4 py-3 bg-gray-100 border-t border-gray-300">
+      <div className="flex justify-between items-center px-4 py-3 bg-gray-100 border-t border-gray-300 md:h-32 lg:h-24">
       <p className="text-gray-700"><strong>Location:</strong> {event.location}</p>
       <div className="flex justify-end">
-      <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-200 rounded-full">
-        <img src={info} alt="Info" className="w-6 h-6 invisible md:visible" />
-      </button>
-
           <Link 
             to={`/register?id=${event.id}`} 
-            className="bg-primary-60 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-teal-700 transition"
+            className="w-48 h-10 bg-primary-60 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-teal-700 transition text-center"
           >
             Register for Workshop
           </Link>

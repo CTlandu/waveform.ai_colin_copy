@@ -152,7 +152,7 @@ const PremierePage = () => {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <div className="bg-primary-40/30 rounded-lg p-6 transform hover:scale-105 transition-transform">
+              <div className="bg-primary-40/30 rounded-lg p-6">
                 <h3 className="text-2xl font-bold text-primary-90 mb-3">
                   Innovative AI Performance
                 </h3>
@@ -162,7 +162,7 @@ const PremierePage = () => {
                 </p>
               </div>
 
-              <div className="bg-primary-40/30 rounded-lg p-6 transform hover:scale-105 transition-transform">
+              <div className="bg-primary-40/30 rounded-lg p-6">
                 <h3 className="text-2xl font-bold text-primary-90 mb-3">
                   Interdisciplinary Collaboration
                 </h3>
@@ -172,7 +172,7 @@ const PremierePage = () => {
                 </p>
               </div>
 
-              <div className="bg-primary-40/30 rounded-lg p-6 transform hover:scale-105 transition-transform">
+              <div className="bg-primary-40/30 rounded-lg p-6">
                 <h3 className="text-2xl font-bold text-primary-90 mb-3">
                   Interactive Demonstrations
                 </h3>
@@ -182,7 +182,7 @@ const PremierePage = () => {
                 </p>
               </div>
 
-              <div className="bg-primary-40/30 rounded-lg p-6 transform hover:scale-105 transition-transform">
+              <div className="bg-primary-40/30 rounded-lg p-6">
                 <h3 className="text-2xl font-bold text-primary-90 mb-3">
                   Exclusive Experience
                 </h3>

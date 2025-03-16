@@ -67,7 +67,7 @@ const PremierePage = () => {
                 <div className="text-2xl text-white mb-4">
                   <span className="text-primary-90 font-bold">Location:</span>
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=PBK+Studio+Theatre+William+and+Mary"
+                    href="https://www.google.com/maps/search/?api=1&query=Phi+Beta+Kappa+Lobby+William+and+Mary"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:text-primary-90 transition-colors ml-2 flex items-center inline-flex"

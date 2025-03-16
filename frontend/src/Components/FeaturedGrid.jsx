@@ -51,7 +51,7 @@ const FeaturedGrid = () => {
                 </p>
                 <p className="text-primary-90 font-semibold text-lg flex items-center gap-1">
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=PBK+Studio+Theatre+William+and+Mary"
+                    href="https://www.google.com/maps/search/?api=1&query=Phi+Beta+Kappa+Lobby+William+and+Mary"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline flex items-center"
@@ -195,7 +195,7 @@ const FeaturedGrid = () => {
                 </div>
                 <div className="bg-primary-50/30 px-3 py-1 rounded text-white text-sm">
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=PBK+Lobby+William+and+Mary"
+                    href="https://www.google.com/maps/search/?api=1&query=Phi+Beta+Kappa+Lobby+William+and+Mary"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline flex items-center"

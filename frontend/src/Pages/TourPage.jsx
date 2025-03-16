@@ -24,12 +24,12 @@ const TourPage = () => {
         {/* Contact Card */}
         <div className="max-w-md mx-auto mt-8 bg-primary-50/40 backdrop-blur-md rounded-lg p-4 shadow-lg text-center transform hover:scale-105 transition-transform">
           <p className="text-xl text-white font-medium">
-            Interested?{" "}
             <Link
               to="/contact"
-              className="text-primary-90 font-bold hover:underline"
+              className="text-xl text-white font-medium inline-block transform hover:scale-105 transition-transform"
             >
-              Contact us!
+              Interested?{" "}
+              <span className="text-primary-90 font-bold">Contact us!</span>
             </Link>
           </p>
         </div>

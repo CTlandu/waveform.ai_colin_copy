@@ -38,12 +38,12 @@ export const teamMembers = [
   {
     id: 3,
     name: "Melody Chua",
-    role: "Professional Musician",
+    role: "New Media Artist and Performer",
     image: melodyChua,
     description:
       "Melody Chua is an international transdisciplinary artist and flutist who creates innovative performances with sensor-augmented instruments and interactive installations, currently pursuing doctoral research on improvisation machines at Kunstuniversität Graz and Zürich University of the Arts.",
-    email: "melody.chua@example.com",
-    // website: "https://example.com",
+    email: "melo@chua.ch",
+    website: "https://chua.ch",
     // linkedin: "https://linkedin.com/in/melody-chua",
   },
   {

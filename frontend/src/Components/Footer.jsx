@@ -8,11 +8,19 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
         {/* Logo, Title and Email Section */}
         <div className="mb-8 flex flex-col items-center">
-          <div className="flex items-center gap-4 mb-2">
-            <h2 className="text-white text-4xl font-bold">Waveform.ai</h2>
+          <div className="flex items-center gap-4 mb-2 group">
             <a
               href="mailto:waveformai@wm.edu"
-              className="text-white hover:text-primary-50 transition-colors"
+              className="text-white transition-colors"
+              aria-label="Email us"
+            >
+              <h2 className="text-white text-4xl font-bold group-hover:text-primary-50">
+                Waveform.ai
+              </h2>
+            </a>
+            <a
+              href="mailto:waveformai@wm.edu"
+              className="text-white group-hover:text-primary-50 transition-colors"
               aria-label="Email us"
             >
               <FaEnvelope className="w-6 h-6" />

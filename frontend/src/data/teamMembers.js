@@ -32,7 +32,7 @@ export const teamMembers = [
     description:
       "Prof. Ben Whiting serves as Music and Artistic Director, an internationally award-winning composer who explores technological innovations to enhance musical expression through his work with numerous prestigious festivals and organizations.",
     email: "bdwhiting@wm.edu",
-    // website: "https://example.com",
+    website: "http://benjamindwhiting.com/",
     // linkedin: "https://linkedin.com/in/ben-whiting",
   },
   {

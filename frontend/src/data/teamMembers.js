@@ -108,7 +108,7 @@ export const teamMembers = [
     image: finnurCricco,
     description:
       "Finnur Cricco is a sophomore EPAD student combining music, art, and electronics expertise.",
-    // email: "finnur.cricco@example.com",
+    email: "foddssoncricco@wm.edu",
     // website: "https://example.com",
     // linkedin: "https://linkedin.com/in/finnur-cricco",
   },

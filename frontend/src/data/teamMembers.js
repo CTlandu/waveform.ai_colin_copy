@@ -16,7 +16,7 @@ export const teamMembers = [
   {
     id: 1,
     name: "Dr. Ran Yang",
-    role: "Exec Producer/Lead Tech",
+    role: "Exec Producer/Tech Lead",
     image: ranYang,
     description:
       "Prof. Ran Yang leads production and technical development, bringing 20 years of higher education experience in physics and electrical engineering with AI applications in sound design and medical technologies.",

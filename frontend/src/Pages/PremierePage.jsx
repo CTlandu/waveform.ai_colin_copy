@@ -3,6 +3,8 @@ import FloatingBubbles from "../Components/FloatingBubbles";
 // Removed image imports
 // import flyer from "../assets/ASE_Day 2_WaveformAI.png";
 // import event_info from "../assets/Fill Allignment.png";
+import waveformai_poster from "../assets/waveformai_poster.png";
+import program_pdf from "../assets/Waveform.ai_ProgramFINAL.pdf";
 
 const PremierePage = () => {
   // Removed carousel-related states and functions
@@ -13,17 +15,16 @@ const PremierePage = () => {
 
       {/* Hero Section */}
       <section className="relative py-10 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             {/* Text Content */}
             <div className="text-center md:text-center md:w-1/2 flex flex-col items-center">
-              <h1 className="text-3xl md:text-6xl font-bold text-white mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
                 Waveform.ai Grand Premiere
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-                A demonstration of how music and physics work together to
-                celebrate the transhumanist potential of welcoming AI onto the
-                stage as a partner instead of merely as a tool.
+                Bridging music and physics to welcome AI as a creative partner
+                on stage.
               </p>
               <a
                 href="https://wm.universitytickets.com/w/event.aspx?id=1689"
@@ -42,12 +43,12 @@ const PremierePage = () => {
               </div>
               <div className="text-center mt-4">
                 <a
-                  href="/src/assets/Waveform.ai_ProgramFINAL.pdf"
+                  href={program_pdf}
                   className="text-primary-90/80 hover:text-primary-90 transition-colors text-sm"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Download Full Program here
+                  * Download Full Program here
                 </a>
               </div>
             </div>
@@ -55,9 +56,9 @@ const PremierePage = () => {
             {/* Image */}
             <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
               <img
-                src="/src/assets/waveformai_poster.png"
+                src={waveformai_poster}
                 alt="Waveform.ai Event"
-                className="w-full h-auto rounded-xl shadow-lg max-w-md mx-auto"
+                className="w-full h-auto rounded-xl shadow-lg max-w-sm mx-auto"
               />
             </div>
           </div>

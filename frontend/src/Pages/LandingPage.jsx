@@ -3,6 +3,7 @@ import { useState } from "react";
 import FloatingBubbles from "../Components/FloatingBubbles";
 import FeaturedGrid from "../Components/FeaturedGrid";
 import FrontPanel from "../Components/FrontPanel";
+import programpdf from "../assets/Waveform.ai_ProgramFINAL.pdf";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             {/* Main Title and Description */}
-            <h1 className="text-5xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-5xl font-bold text-white mb-6 mt-12">
               Waveform.ai – Where Sound Meets Motion
             </h1>
             <p className="text-2xl text-primary-90/80 max-w-2xl mx-auto">
@@ -25,12 +26,12 @@ const LandingPage = () => {
           </div>
           <div className="text-center mt-8">
             <a
-              href="/src/assets/Waveform.ai_ProgramFINAL.pdf"
+              href={programpdf}
               className="text-primary-60 hover:text-primary-90 transition-colors text-sm italic"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Download Full Program here
+              * Download Full Program here
             </a>
           </div>
         </div>

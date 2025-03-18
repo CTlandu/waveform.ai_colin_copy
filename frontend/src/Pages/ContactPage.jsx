@@ -41,7 +41,7 @@ const ContactPage = () => {
                   Dr. Ran Yang
                 </h3>
                 <p className="text-primary-90/80 mb-4">
-                  Exec Producer/Lead Tech
+                  Exec Producer/Tech Lead
                 </p>
                 <div className="flex items-center justify-center md:justify-start gap-2 text-white">
                   <svg

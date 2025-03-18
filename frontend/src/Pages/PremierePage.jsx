@@ -40,6 +40,16 @@ const PremierePage = () => {
                   </span>
                 </div>
               </div>
+              <div className="text-center mt-4">
+                <a
+                  href="/src/assets/Waveform.ai_ProgramFINAL.pdf"
+                  className="text-primary-90/80 hover:text-primary-90 transition-colors text-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Full Program here
+                </a>
+              </div>
             </div>
 
             {/* Image */}

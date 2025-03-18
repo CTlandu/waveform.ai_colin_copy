@@ -12,7 +12,7 @@ const LandingPage = () => {
       <FloatingBubbles />
 
       {/* Hero Section */}
-      <section className="relative py-8 px-6">
+      <section className="relative pt-8 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             {/* Main Title and Description */}
@@ -22,6 +22,16 @@ const LandingPage = () => {
             <p className="text-2xl text-primary-90/80 max-w-2xl mx-auto">
               Your presence shapes the music, AI echoes the unseen.
             </p>
+          </div>
+          <div className="text-center mt-8">
+            <a
+              href="/src/assets/Waveform.ai_ProgramFINAL.pdf"
+              className="text-primary-60 hover:text-primary-90 transition-colors text-sm italic"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download Full Program here
+            </a>
           </div>
         </div>
       </section>

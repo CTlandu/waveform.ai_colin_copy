@@ -14,29 +14,41 @@ const PremierePage = () => {
       {/* Hero Section */}
       <section className="relative py-10 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-3xl md:text-6xl font-bold text-white mb-6">
-              Waveform.ai Grand Premiere
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-              A demonstration of how music and physics work together to
-              celebrate the transhumanist potential of welcoming AI onto the
-              stage as a partner instead of merely as a tool.
-            </p>
-            <a
-              href="https://wm.universitytickets.com/w/event.aspx?id=1689"
-              className="inline-block px-8 py-3 bg-primary-50 hover:bg-primary-60 text-white font-semibold rounded-full transition-colors text-lg mt-5"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              RSVP tickets for free
-            </a>
-          </div>
-          <div className="mt-6 text-center">
-            <div className="inline-block bg-primary-90/20 px-6 py-3 rounded-lg border border-primary-90/50 animate-pulse">
-              <span className="text-2xl font-bold text-white">
-                Free gifts for all attendees
-              </span>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Text Content */}
+            <div className="text-center md:text-center md:w-1/2 flex flex-col items-center">
+              <h1 className="text-3xl md:text-6xl font-bold text-white mb-6">
+                Waveform.ai Grand Premiere
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
+                A demonstration of how music and physics work together to
+                celebrate the transhumanist potential of welcoming AI onto the
+                stage as a partner instead of merely as a tool.
+              </p>
+              <a
+                href="https://wm.universitytickets.com/w/event.aspx?id=1689"
+                className="inline-block px-8 py-3 bg-primary-50 hover:bg-primary-60 text-white font-semibold rounded-full transition-colors text-lg mt-5"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                RSVP tickets for free
+              </a>
+              <div className="mt-6">
+                <div className="inline-block bg-primary-90/20 px-6 py-3 rounded-lg border border-primary-90/50 animate-pulse">
+                  <span className="text-2xl font-bold text-white">
+                    Free gifts for all attendees
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+              <img
+                src="/src/assets/waveformai_poster.png"
+                alt="Waveform.ai Event"
+                className="w-full h-auto rounded-xl shadow-lg max-w-md mx-auto"
+              />
             </div>
           </div>
         </div>

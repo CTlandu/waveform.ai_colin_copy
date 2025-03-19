@@ -8,6 +8,7 @@ import RegistrationPage from "./Pages/RegistrationPage";
 import PremierePage from "./Pages/PremierePage";
 import TourPage from "./Pages/TourPage";
 import ContactPage from "./Pages/ContactPage";
+import AdminPage from "./Pages/AdminPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/premiere" element={<PremierePage />} />
           <Route path="/tour" element={<TourPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin" element={<AdminPage />} />
 
           {/* Add catch-all route */}
           <Route path="*" element={<Navigate to="/" replace />} />

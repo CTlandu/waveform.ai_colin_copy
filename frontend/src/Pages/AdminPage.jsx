@@ -6,15 +6,47 @@ function formatTime(time) {
     const ampm = hours >= 12 ? "PM" : "AM";
     const formattedHours = hours % 12 || 12;
     return `${formattedHours}:${String(minutes).padStart(2, "0")} ${ampm}`;
-  }
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    
+    // Options to display the date in a readable format
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    };
+    
+    return date.toLocaleDateString("en-US", options); // Format it as "March 24, 2025"
+}
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+
+    // You can define options for different formats like 'long' or 'short' dates
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true, // AM/PM format
+    };
+
+    return date.toLocaleString("en-US", options); // Example: "March 20, 2025, 12:31 AM"
+}
+
 
 const AdminPage = () => {
     const [registrations, setRegistrations] = useState([]);
+    const [events, setEvents] = useState({}); // Store event details by ID
 
     useEffect(() => {
         const getRegistrations = async () => {
             try {
-                const response = await fetch("/api/registration/get");
+                console.log("Test timestamp conversion: ", formatTimestamp('2025-03-20T00:49:21.000Z'))
+                const response = await fetch("http://localhost:3000/api/registration/get");
                 const data = await response.json();
                 setRegistrations(data.result);
             } catch (err) {
@@ -24,6 +56,25 @@ const AdminPage = () => {
 
         getRegistrations();
     }, []);
+
+    useEffect(() => {
+        const getEventDetailsById = async (eventId) => {
+            try {
+                const response = await fetch(`http://localhost:3000/api/events/${eventId}/get`);
+                const data = await response.json();
+                setEvents(prevState => ({ ...prevState, [eventId]: data.result }));
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        // Fetch event details for each registration's event_id
+        registrations.forEach((registration) => {
+            if (registration.event_id) {
+                getEventDetailsById(registration.event_id);
+            }
+        });
+    }, [registrations]); // Only run when registrations change
 
     return (
         <div>
@@ -47,15 +98,24 @@ const AdminPage = () => {
                     <tbody>
                         {registrations.map((registration, index) => (
                             <tr key={index} className="hover:bg-gray-50">
-                                <td className="border px-4 py-2">Null</td>
-                                <td className="border px-4 py-2">Null</td>
-                                <td className="border px-4 py-2">Null</td>
+                                {/* Event details */}
+                                <td className="border px-4 py-2">
+                                    {events[registration.event_id] ? events[registration.event_id].title : "Loading..."}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    {events[registration.event_id] ? formatDate(events[registration.event_id].date) : "Loading..."}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    {events[registration.event_id] ? formatTime(events[registration.event_id].time) : "Loading..."}
+                                </td>
+
+                                {/* Registration details */}
                                 <td className="border px-4 py-2">{registration.name}</td>
                                 <td className="border px-4 py-2">{registration.email}</td>
                                 <td className="border px-4 py-2">{registration.phone}</td>
                                 <td className="border px-4 py-2">{registration.title}</td>
                                 <td className="border px-4 py-2">{registration.affiliation}</td>
-                                <td className="border px-4 py-2">{formatTime(registration.created_at)}</td>
+                                <td className="border px-4 py-2">{formatTimestamp(registration.created_at)}</td>
                             </tr>
                         ))}
                     </tbody>

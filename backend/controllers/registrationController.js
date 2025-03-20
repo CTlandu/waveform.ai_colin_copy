@@ -46,4 +46,21 @@ const unregisterFromEvent = async (req, res) => {
     }
 };
 
-module.exports = { registerForEvent, unregisterFromEvent };
+//<backend-server>/api/registration/get
+const getAllRegistrations = async (req, res) => {
+    try{
+        console.log("Querying the database...");
+
+        //get all registrations
+        const [results] = await db.query('Select * from registrations');
+        console.log("Results: ", results)
+
+        //return 200 code if successful
+        res.status(200).json({ success: true, result: results });
+    }catch(err){
+        console.error("Encountered an unexpected error: ", err);
+    }
+
+};
+
+module.exports = { registerForEvent, unregisterFromEvent, getAllRegistrations };

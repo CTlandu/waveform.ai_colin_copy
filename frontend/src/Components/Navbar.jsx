@@ -52,6 +52,12 @@ const Navbar = () => {
             Workshops
           </Link>
           <Link
+            to="/gear"
+            className="text-white hover:text-primary-50 transition-colors"
+          >
+            Gears
+          </Link>
+          <Link
             to="/tour"
             className="text-white hover:text-primary-50 transition-colors"
           >

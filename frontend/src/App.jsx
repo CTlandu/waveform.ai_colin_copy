@@ -9,6 +9,7 @@ import PremierePage from "./Pages/PremierePage";
 import TourPage from "./Pages/TourPage";
 import ContactPage from "./Pages/ContactPage";
 import AdminPage from "./Pages/AdminPage";
+import GearPage from "./Pages/GearPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/premiere" element={<PremierePage />} />
+          <Route path="/gear" element={<GearPage></GearPage>} />
           <Route path="/tour" element={<TourPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminPage />} />

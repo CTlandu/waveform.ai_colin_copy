@@ -20,11 +20,11 @@ const PostcardGrid = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-4xl font-bold text-white mb-8 text-center">
-        Waveform.ai Merchandise
+        Waveform.ai Postcards
       </h1>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-2 md:gap-6">
         {postcards.map((item) => (
           <div
             key={item.id}
@@ -52,7 +52,7 @@ const PostcardGrid = () => {
               />
               {!item.isPinned && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-xs md:text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Coming Soon
                   </span>
                 </div>

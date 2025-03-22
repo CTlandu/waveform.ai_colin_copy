@@ -1,28 +1,18 @@
 import { useState, useEffect } from "react";
 import FloatingBubbles from "../Components/FloatingBubbles";
+import { postcardData } from "../data/gearData";
 
 const GearPage = () => {
   const [postcards, setPostcards] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // 模拟数据，之后替换为真实数据
   useEffect(() => {
-    // 这里之后会替换为真实的图片数据
-    const dummyData = Array(35)
-      .fill(null)
-      .map((_, index) => ({
-        id: index + 1,
-        name: `Postcard ${index + 1}`,
-        isPinned: index < 3, // 前三张为置顶卡片
-        image: `placeholder-${index + 1}.png`,
-      }));
-
     // 对数据进行排序：置顶的按字母顺序排，其他的随机排序
-    const pinnedCards = dummyData
+    const pinnedCards = postcardData
       .filter((card) => card.isPinned)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    const unpinnedCards = dummyData
+    const unpinnedCards = postcardData
       .filter((card) => !card.isPinned)
       .sort(() => Math.random() - 0.5);
 

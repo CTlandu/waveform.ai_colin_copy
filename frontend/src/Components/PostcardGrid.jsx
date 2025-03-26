@@ -28,35 +28,15 @@ const PostcardGrid = () => {
         {postcards.map((item) => (
           <div
             key={item.id}
-            className={`
-              aspect-square relative group 
-              ${item.isPinned ? "cursor-pointer" : "cursor-not-allowed"}
-            `}
-            onClick={() => item.isPinned && setSelectedItem(item)}
+            className="aspect-square relative group cursor-pointer"
+            onClick={() => setSelectedItem(item)}
           >
-            <div
-              className={`
-              relative w-full h-full rounded-lg overflow-hidden
-              ${!item.isPinned ? "backdrop-blur-sm" : ""}
-              bg-primary-20/30 transition-all duration-300
-            `}
-            >
+            <div className="relative w-full h-full rounded-lg overflow-hidden bg-primary-20/30 transition-all duration-300">
               <img
                 src={item.image}
                 alt={item.name}
-                className={`
-                  w-full h-full object-cover
-                  ${!item.isPinned ? "blur-sm group-hover:blur-[6px]" : ""}
-                  transition-all duration-300
-                `}
+                className="w-full h-full object-cover transition-all duration-300"
               />
-              {!item.isPinned && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-xs md:text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Coming Soon
-                  </span>
-                </div>
-              )}
             </div>
           </div>
         ))}

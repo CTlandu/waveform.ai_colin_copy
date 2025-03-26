@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FloatingBubbles from "../Components/FloatingBubbles";
 import PostcardGrid from "../Components/PostcardGrid";
+import TshirtDisplay from "../Components/TshirtDisplay";
 
 const GearPage = () => {
   return (
@@ -9,6 +10,7 @@ const GearPage = () => {
 
       {/* Main Content */}
       <div className="relative py-10 px-6">
+        <TshirtDisplay />
         <PostcardGrid />
       </div>
     </div>

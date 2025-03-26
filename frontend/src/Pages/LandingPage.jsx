@@ -4,6 +4,7 @@ import FloatingBubbles from "../Components/FloatingBubbles";
 import FeaturedGrid from "../Components/FeaturedGrid";
 import FrontPanel from "../Components/FrontPanel";
 import programpdf from "../assets/Waveform.ai_ProgramFINAL.pdf";
+import logoText from "../assets/origami_logo.svg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -17,8 +18,13 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             {/* Main Title and Description */}
-            <h1 className="text-5xl md:text-5xl font-bold text-white mb-6 mt-12">
-              Waveform.ai – Where Sound Meets Motion
+            <h1 className="text-5xl md:text-5xl font-bold text-white mb-6 flex flex-col md:flex-row items-center justify-center">
+              <img
+                src={logoText}
+                alt="Waveform.ai"
+                className="h-24 md:h-20 w-auto"
+              />
+              <span className="md:mt-0">- Where Sound Meets Motion</span>
             </h1>
             <p className="text-2xl text-primary-90/80 max-w-2xl mx-auto">
               Your presence shapes the music, AI echoes the unseen.

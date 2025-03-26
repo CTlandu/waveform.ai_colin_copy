@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaEnvelope } from "react-icons/fa"; // 需要安装 react-icons
+import { FaEnvelope } from "react-icons/fa";
 import wmLogo from "../assets/wm-logo.png";
+import logoText from "../assets/origami_logo.svg";
 
 const Footer = () => {
   return (
@@ -14,9 +15,11 @@ const Footer = () => {
               className="text-white transition-colors"
               aria-label="Email us"
             >
-              <h2 className="text-white text-4xl font-bold group-hover:text-primary-50">
-                Waveform.ai
-              </h2>
+              <img
+                src={logoText}
+                alt="Waveform.ai"
+                className="h-16 w-auto group-hover:opacity-80 transition-opacity"
+              />
             </a>
             <a
               href="mailto:waveformai@wm.edu"

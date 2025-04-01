@@ -77,7 +77,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="underline hover:text-white transition-colors"
             >
-              Arts and Science Exchange (ASE)
+              Art and Science Exchange (ASE)
             </a>
           </div>
           <div className="text-white/70">

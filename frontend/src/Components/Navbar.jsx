@@ -55,7 +55,7 @@ const Navbar = () => {
             to="/gear"
             className="text-white hover:text-primary-50 transition-colors"
           >
-            Gears
+            Gear
           </Link>
           <Link
             to="/tour"

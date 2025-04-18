@@ -13,6 +13,17 @@ const LandingPage = () => {
     <div className="relative min-h-screen bg-gradient-to-b from-primary-10 to-primary-30 overflow-hidden">
       <FloatingBubbles />
 
+      {/* Announcement Banner */}
+      <div className="bg-primary-60 text-white py-3 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-sm md:text-base">
+            Waveform.ai performances and workshops in March 2025 have been
+            successfully completed. Thank you to all our supporters and
+            participants! - The Waveform.ai Team
+          </p>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative pt-8 px-6">
         <div className="max-w-7xl mx-auto">

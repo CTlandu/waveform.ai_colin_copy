@@ -6,30 +6,16 @@ const FeaturedGrid = () => {
 
   return (
     <div>
-      {/* Eye-catching banner for free tickets and gifts */}
-      <div className="relative mb-8 overflow-hidden">
-        {/* <div className="bg-gradient-to-r from-primary-70 via-primary-90 to-primary-70 text-white text-center py-3 px-4 transform -rotate-1 shadow-lg">
-          <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary-50 rounded-full opacity-50 animate-pulse"></div>
-          <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-primary-60 rounded-full opacity-50 animate-pulse"></div>
-          <div className="relative">
-            <span className="absolute -left-1 top-1/2 transform -translate-y-1/2 -rotate-12 text-4xl text-primary-40">
-              ★
-            </span>
-            <span className="absolute -right-1 top-1/2 transform -translate-y-1/2 rotate-12 text-4xl text-primary-40">
-              ★
-            </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold tracking-wider animate-pulse">
-              FREE Tickets & Gifts for all events
-            </h2>
-          </div>
-          <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform rotate-45"></div>
-        </div> */}
-        <div className="absolute -bottom-3 left-0 right-0 h-6 bg-gradient-to-r from-primary-70 via-primary-90 to-primary-70 transform rotate-1 z-[-1]"></div>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Left Side - Premiere Information */}
-        <div className="bg-primary-20/30 backdrop-blur-md rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+        <div className="bg-primary-20/30 backdrop-blur-md rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow relative">
+          {/* Completion Badge */}
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-primary-90/90 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12">
+              <span className="text-sm font-bold">COMPLETED</span>
+            </div>
+          </div>
+
           <h2 className="text-3xl font-bold text-white mb-4 text-center">
             Grand Premiere
           </h2>
@@ -101,13 +87,20 @@ const FeaturedGrid = () => {
               onClick={() => navigate("/premiere")}
               className="bg-primary-50 hover:bg-primary-60 text-white px-8 py-3 rounded-full transition-colors text-lg font-medium"
             >
-              Free Tickets & Details →
+              Details →
             </button>
           </div>
         </div>
 
         {/* Right Side - Workshop Information */}
-        <div className="bg-primary-20/30 backdrop-blur-md rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+        <div className="bg-primary-20/30 backdrop-blur-md rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow relative">
+          {/* Completion Badge */}
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-primary-90/90 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12">
+              <span className="text-sm font-bold">COMPLETED</span>
+            </div>
+          </div>
+
           <h2 className="text-3xl font-bold text-white mb-4 text-center">
             Workshops
           </h2>
@@ -242,7 +235,7 @@ const FeaturedGrid = () => {
               onClick={() => navigate("/workshops")}
               className="bg-primary-50 hover:bg-primary-60 text-white px-8 py-3 rounded-full transition-colors text-lg font-medium"
             >
-              Tickets & All Workshops →
+              All Workshops →
             </button>
           </div>
         </div>

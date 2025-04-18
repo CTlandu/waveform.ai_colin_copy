@@ -19,14 +19,24 @@ const PremierePage = () => {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             {/* Text Content */}
             <div className="text-center md:text-center md:w-1/2 flex flex-col items-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                Waveform.ai Grand Premiere
-              </h1>
+              <div className="relative">
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+                  Waveform.ai Grand Premiere
+                </h1>
+                {/* Completion Badge */}
+                <div className="absolute -top-4 -right-4">
+                  <div className="bg-primary-90/90 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12">
+                    <span className="text-sm font-bold">
+                      COMPLETED on March 25, 2025
+                    </span>
+                  </div>
+                </div>
+              </div>
               <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
                 Bridging music and physics to welcome AI as a creative partner
                 on stage.
               </p>
-              <a
+              {/* <a
                 href="https://wm.universitytickets.com/w/event.aspx?id=1689"
                 className="inline-block px-8 py-3 bg-primary-50 hover:bg-primary-60 text-white font-semibold rounded-full transition-colors text-lg mt-5"
                 target="_blank"
@@ -40,7 +50,7 @@ const PremierePage = () => {
                     Free gifts for all attendees
                   </span>
                 </div>
-              </div>
+              </div> */}
               <div className="text-center mt-4">
                 <a
                   href={program_pdf}
@@ -53,13 +63,16 @@ const PremierePage = () => {
               </div>
             </div>
 
-            {/* Image */}
-            <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-              <img
-                src={waveformai_poster}
-                alt="Waveform.ai Event"
-                className="w-full h-auto rounded-xl shadow-lg max-w-sm mx-auto"
-              />
+            {/* Image with Completion Overlay */}
+            <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center relative">
+              <div className="relative">
+                <img
+                  src={waveformai_poster}
+                  alt="Waveform.ai Event"
+                  className="w-full h-auto rounded-xl shadow-lg max-w-sm mx-auto"
+                />
+                <div className="absolute inset-0 bg-primary-90/10 rounded-xl"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +82,14 @@ const PremierePage = () => {
       <section className="py-10 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Event Details */}
-          <div className="bg-primary-20/50 backdrop-blur-md rounded-xl p-8 shadow-lg mb-10">
+          <div className="bg-primary-20/50 backdrop-blur-md rounded-xl p-8 shadow-lg mb-10 relative">
+            {/* Completion Badge */}
+            <div className="absolute top-4 right-4">
+              <div className="bg-primary-90/90 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12">
+                <span className="text-sm font-bold">COMPLETED</span>
+              </div>
+            </div>
+
             <h2 className="text-3xl font-bold text-white mb-6 text-center">
               Premiere Showtime
             </h2>
@@ -216,20 +236,20 @@ const PremierePage = () => {
             </div>
           </div>
 
-          {/* Final CTA */}
+          {/* Final CTA - Modified for completed event */}
           <div className="text-center mb-10">
             <div className="inline-block bg-primary-40/30 px-8 py-6 rounded-xl">
               <p className="text-white text-2xl mb-4">
-                Don't miss this unique experience at the intersection of art,
-                science, and technology!
+                Thank you for being part of this unique experience at the
+                intersection of art, science, and technology!
               </p>
               <a
-                href="https://wm.universitytickets.com/w/event.aspx?id=1689"
+                href={program_pdf}
                 className="inline-block px-10 py-4 bg-primary-50 hover:bg-primary-60 text-white font-semibold rounded-full transition-colors text-xl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Get Your Free Tickets Now
+                View Event Program
               </a>
             </div>
           </div>
